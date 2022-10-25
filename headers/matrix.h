@@ -5,10 +5,14 @@
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
 
+
 #include <iostream>
+
+class Acteur;
 
 class Matrix
 {
+    friend class Acteur;
     public:
         Matrix(int, int);
         Matrix(double**, int, int);
@@ -52,6 +56,9 @@ class Matrix
 
         void allocSpace();
         Matrix expHelper(const Matrix&, int);
+
+        void in(int x, int y) {this->p[y][x]++;}
+        void out(int x, int y) {this->p[y][x]--;}
 };
 
 Matrix operator+(const Matrix&, const Matrix&);
