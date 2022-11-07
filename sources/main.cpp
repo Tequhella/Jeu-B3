@@ -1,6 +1,6 @@
 /**
  * @file main.cpp
- * @author Lilian CHARDON (lilian.chardon@ynov.com)
+ * @author Lilian CHARDON,
  * @brief 
  * @version 0.1
  * @date 25-10-2022
@@ -33,6 +33,10 @@ int main(int argc, char const *argv[])
     Un.moveR();
     Deux.moveR();
     Trois.move(1, 4);
+
+    cout << A << endl;
+    
+    Trois.move(-3, 0);
 
     
     cout << A << endl;

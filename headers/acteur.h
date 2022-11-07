@@ -1,6 +1,6 @@
 /**
  * @file acteur.h
- * @author Lilian CHARDON (lilian.chardon@ynov.com)
+ * @author Lilian CHARDON,
  * @brief 
  * @version 0.1
  * @date 25-10-2022

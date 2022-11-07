@@ -45,7 +45,7 @@ void Acteur::move(int x, int y)
         this->x -= LARGEUR_MAX;
     }
 
-    this->y += x;
+    this->y += y;
     if (this->y < 0)
     {
         this->y += LARGEUR_MAX;
