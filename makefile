@@ -23,5 +23,8 @@ $(OBJS)acteur.o: $(SRCS)acteur.cpp $(HEADERS)acteur.h
 $(OBJS)interface.o: $(SRCS)interface.cpp $(HEADERS)interface.h
 	$(CC) $(CFLAGS) -c $(SRCS)interface.cpp -o $(OBJS)interface.o 
 
+packages:
+	sudo apt install libsfml-dev -y
+
 clean:
 	rm -f $(OBJS)*.o main
