@@ -15,5 +15,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: clean
       run: make clean
+    - name: packages
+      run: make packages
     - name: make
       run: make
