@@ -2,16 +2,18 @@ CC = g++
 
 CFLAGS = -Wall -g
 
+LIBS = -lsfml-graphics -lsfml-window -lsfml-system
+
 SRCS = sources/
 
 OBJS = obj/
 
 HEADERS = headers/
 
-all: $(OBJS)main.o $(OBJS)matrix.o $(OBJS)acteur.o
-	$(CC) $(CFLAGS) -o main $(OBJS)main.o $(OBJS)matrix.o $(OBJS)acteur.o
+all: $(OBJS)main.o $(OBJS)matrix.o $(OBJS)acteur.o $(OBJS)interface.o
+	$(CC) $(CFLAGS) -o main $(OBJS)main.o $(OBJS)matrix.o $(OBJS)acteur.o $(OBJS)interface.o $(LIBS)
 
-$(OBJS)main.o: $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)acteur.h
+$(OBJS)main.o: $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)acteur.h $(HEADERS)interface.h
 	$(CC) $(CFLAGS) -c $(SRCS)main.cpp -o $(OBJS)main.o
 
 $(OBJS)matrix.o: $(SRCS)matrix.cpp $(HEADERS)matrix.h
