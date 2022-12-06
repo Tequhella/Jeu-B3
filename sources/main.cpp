@@ -11,35 +11,17 @@
 #include <iostream>
 #include "../headers/matrix.h"
 #include "../headers/acteur.h"
+#include "../headers/interface.h"
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
 
-    Matrix A(10,10);
-    Acteur Un(A, 1, 9);
-    Acteur Deux(A, 1, 9);
-    Acteur Trois(A, 1, 9);
-    Acteur Quatre(A, 1, 9);
-    Acteur Cinq(A, 1, 9);
-    Acteur Six(A, 1, 9);
-    Acteur Sept(A, 1, 9);
-    Acteur Huit(A, 1, 9);
-    Acteur neuf(A, 1, 9);
-    Acteur Dix(A, 1, 9);
-    
-    cout << A << endl;
+    Interface* interface = new Interface();
 
-    Un.moveR();
-    Deux.moveR();
-    Trois.move(1, 4);
+    interface->display();
 
-    cout << A << endl;
-    
-    Trois.move(-3, 0);
-
-    
-    cout << A << endl;
+    delete interface;
     
     return 0;
 }
