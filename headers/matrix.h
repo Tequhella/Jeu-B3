@@ -50,6 +50,14 @@ class Matrix
         void readSolutionsFromRREF(std::ostream& os);
         Matrix inverse();
 
+        /***********/
+        /* GETTERS */
+        /***********/
+
+        inline int getLignes() const { return rows_; }
+        inline int getColonnes() const { return cols_; }
+        inline double** getMatrice() const { return p; }
+
     private:
         int rows_, cols_;
         double **p;

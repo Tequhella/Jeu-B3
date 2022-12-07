@@ -12,6 +12,9 @@
 #ifndef __INTERFACE_H__
 #define __INTERFACE_H__
 
+#define LARGEUR 800
+#define HAUTEUR 600
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
@@ -23,10 +26,13 @@ using namespace sf;
 class Interface
 {
     private:
-        RenderWindow* window;      // fenêtre
-        Event event;               // évènement
-        RectangleShape* rectangle; // rectangle
-        Acteur* acteur;            // acteur
+        RenderWindow* window;     // fenêtre
+        RectangleShape rectangle; // rectangle
+        vector<Acteur*> acteurs;  // acteurs
+        Matrix matrix;            // matrice
+        Event event;              // évènement
+        Font font;                // police
+        Text text;                // texte
 
     public:
     /****************/
@@ -37,6 +43,49 @@ class Interface
          * @brief Constructeur par défaut de la classe Interface
          */
         Interface();
+
+        /**
+         * @brief Constructeur de la classe Interface
+         * 
+         * @param window la fenêtre
+         */
+        Interface(RenderWindow* window);
+
+        /**
+         * @brief Constructeur de la classe Interface
+         * 
+         * @param window la fenêtre
+         * @param matrix la matrice
+         */
+        Interface(RenderWindow* window, Matrix& matrix);
+
+        /**
+         * @brief Constructeur de la classe Interface
+         * 
+         * @param window la fenêtre
+         * @param matrix la matrice
+         * @param acteurs les acteurs
+         */
+        Interface(RenderWindow* window, vector<Acteur*> acteurs, Matrix& matrix);
+
+        /**
+         * @brief Constructeur de la classe Interface
+         * 
+         * @param window la fenêtre
+         * @param rectangle le rectangle
+         */
+        Interface(RenderWindow* window, RectangleShape& rectangle);
+
+        /**
+         * @brief Constructeur de la classe Interface
+         * 
+         * @param window la fenêtre
+         * @param rectangle le rectangle
+         * @param acteurs les acteurs
+         * @param matrix la matrice
+         */
+        Interface(RenderWindow* window, RectangleShape& rectangle, vector<Acteur*> acteurs, Matrix& matrix);
+
 
     
     /***************/
@@ -55,7 +104,7 @@ class Interface
         /**
          * @brief Récupère la fenêtre
          * 
-         * @return RenderWindow* 
+         * @return RenderWindow 
          */
         RenderWindow* getWindow() const { return window; }
 
@@ -69,16 +118,16 @@ class Interface
         /**
          * @brief Récupère le rectangle
          * 
-         * @return RectangleShape* 
+         * @return RectangleShape 
          */
-        RectangleShape* getRectangle() const { return rectangle; }
+        RectangleShape getRectangle() const { return rectangle; }
 
         /**
-         * @brief Récupère l'acteur
+         * @brief Récupère les acteurs
          * 
-         * @return Acteur* 
+         * @return vector<Acteur*> 
          */
-        Acteur* getActeur() const { return acteur; }
+        vector<Acteur*> getActeurs() const { return acteurs; }
 
     /***********/
     /* SETTERS */
@@ -87,30 +136,30 @@ class Interface
         /**
          * @brief Définit la fenêtre
          * 
-         * @param window 
+         * @param _window 
          */
-        void setWindow(RenderWindow* window) { this->window = window; }
+        void setWindow(RenderWindow* _window) { this->window = _window; }
 
         /**
          * @brief Définit l'évènement
          * 
-         * @param event 
+         * @param _event 
          */
-        void setEvent(Event event) { this->event = event; }
+        void setEvent(Event _event) { this->event = _event; }
 
         /**
          * @brief Définit le rectangle
          * 
          * @param rectangle 
          */
-        void setRectangle(RectangleShape* rectangle) { this->rectangle = rectangle; }
+        void setRectangle(RectangleShape rectangle) { this->rectangle = rectangle; }
 
         /**
-         * @brief Définit l'acteur
+         * @brief Définit les acteurs
          * 
-         * @param acteur 
+         * @param acteurs 
          */
-        void setActeur(Acteur* acteur) { this->acteur = acteur; }
+        void setActeurs(vector<Acteur*> acteurs) { this->acteurs = acteurs; }
 
     /************/
     /* METHODES */

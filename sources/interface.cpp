@@ -15,19 +15,54 @@
 /* CONSTRUCTEUR */
 /****************/
 
-Interface::Interface()
+Interface::Interface() : window(new RenderWindow(VideoMode(LARGEUR, HAUTEUR), "SFML works!")), rectangle(RectangleShape(Vector2f(10, 10))), matrix(Matrix(80, 60))
 {
-    window = new RenderWindow(VideoMode(200, 200), "SFML works!");
-    rectangle = new RectangleShape(Vector2f(100, 100));
-    rectangle->setFillColor(Color::Green);
-    acteur = new Acteur();
+    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);
+
+    /*
+    font.loadFromFile("arial_mt_black/ARIBL0.ttf");
+    text.setFont(font);
+    text.setCharacterSize(24);
+    text.setFillColor(Color::White);
+    text.setPosition(10, 10);
+    */
 }
+
+Interface::Interface(RenderWindow* window) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), matrix(Matrix(80, 60))
+{
+    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);
+}
+
+Interface::Interface(RenderWindow* window, Matrix& matrix) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), matrix(matrix)
+{
+    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);
+}
+
+Interface::Interface(RenderWindow* window, vector<Acteur*> acteurs, Matrix& matrix) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), acteurs(acteurs), matrix(matrix)
+{
+    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);
+}
+
+Interface::Interface(RenderWindow* window, RectangleShape& rectangle) : window(window), rectangle(rectangle), matrix(Matrix(80, 60))
+{
+    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);
+}
+
+Interface::Interface(RenderWindow* window, RectangleShape& rectangle, vector<Acteur*> acteurs, Matrix& matrix) : window(window), rectangle(rectangle), acteurs(acteurs), matrix(matrix)
+{
+    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);
+}
+
 
 Interface::~Interface()
 {
-    delete window;
-    delete rectangle;
-    delete acteur;
+    
 }
 
 
@@ -46,7 +81,30 @@ void Interface::display()
         }
 
         window->clear();
-        window->draw(*rectangle);
+
+        for (int i = 0; i < matrix.getLignes(); i++)
+        {
+            for (int j = 0; j < matrix.getColonnes(); j++)
+            {
+                rectangle.setPosition(i * 10, j * 10);
+                if (matrix(i, j) == 0)
+                {
+                    // rectangle vide avec bordure
+                    rectangle.setFillColor(Color::White);
+                    rectangle.setOutlineColor(Color::Black);
+                    rectangle.setOutlineThickness(1);
+                }
+                else
+                {
+                    // rectangle plein
+                    rectangle.setFillColor(Color::Black);
+                    rectangle.setOutlineColor(Color::Black);
+                    rectangle.setOutlineThickness(1);
+                }
+                window->draw(rectangle);
+            }
+        }
+
         window->display();
     }
 }

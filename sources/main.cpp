@@ -12,16 +12,28 @@
 #include "../headers/matrix.h"
 #include "../headers/acteur.h"
 #include "../headers/interface.h"
+
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
 
-    Interface* interface = new Interface();
+    Matrix matrix(80, 60);
 
-    interface->display();
+    vector<Acteur*> acteurs;
 
-    delete interface;
+    acteurs.push_back(new Acteur(matrix, 10, 10));
+    acteurs.push_back(new Acteur(matrix, 20, 20));
+    acteurs.push_back(new Acteur(matrix, 30, 30));
+
+    RenderWindow window(VideoMode(LARGEUR, HAUTEUR), "SFML works!");
+
+    Interface interface(&window, acteurs, matrix);
+
+    interface.display();
+
+    for (unsigned int i = 0; i < acteurs.size(); i++)
+        delete acteurs[i];
     
     return 0;
 }
