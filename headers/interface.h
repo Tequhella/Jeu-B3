@@ -26,8 +26,8 @@ class Interface
         RenderWindow* window;      // fenêtre
         Event event;               // évènement
         RectangleShape rectangle;  // rectangle
-        vector<Acteur*> acteurs;   // acteurs
         Matrix matrix;             // matrice
+        vector<Acteur*> acteurs;   // acteurs
 
     public:
     /****************/

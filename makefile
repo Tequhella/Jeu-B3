@@ -16,8 +16,13 @@ else
 	DLLEXT = .so
 endif
 
+ifeq ($(OS),Windows_NT)
 all: $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteur$(DLLEXT) $(OBJS)interface$(DLLEXT)
-	$(CC) $(CFLAGS) -o main $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteur$(DLLEXT) $(OBJS)interface$(DLLEXT) $(LIB)
+	$(CC) $(CFLAGS) -o app.exe $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteur$(DLLEXT) $(OBJS)interface$(DLLEXT) $(LIB)
+else
+all: $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteur$(DLLEXT) $(OBJS)interface$(DLLEXT)
+	$(CC) $(CFLAGS) -o app $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteur$(DLLEXT) $(OBJS)interface$(DLLEXT) $(LIB)
+endif
 
 $(OBJS)main$(DLLEXT): $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)acteur.h $(HEADERS)interface.h
 	$(CC) $(CFLAGS) -c $(SRCS)main.cpp -o $(OBJS)main$(DLLEXT)
