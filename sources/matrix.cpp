@@ -21,11 +21,12 @@ Matrix::Matrix(int rows, int cols) : rows_(rows), cols_(cols)
         for (int j = 0; j < cols_; ++j)
         {
             p[i][j] = 0;
+            e[i][j] = 0;
         }
     }
 }
 
-Matrix::Matrix(double** a, int rows, int cols) : rows_(rows), cols_(cols)
+Matrix::Matrix(int** a, int rows, int cols) : rows_(rows), cols_(cols)
 {
     allocSpace();
     for (int i = 0; i < rows_; ++i)
@@ -37,10 +38,24 @@ Matrix::Matrix(double** a, int rows, int cols) : rows_(rows), cols_(cols)
     }
 }
 
+Matrix::Matrix(int** a, int** b, int rows, int cols) : rows_(rows), cols_(cols)
+{
+    allocSpace();
+    for (int i = 0; i < rows_; ++i)
+    {
+        for (int j = 0; j < cols_; ++j)
+        {
+            p[i][j] = a[i][j];
+            e[i][j] = b[i][j];
+        }
+    }
+}
+
 Matrix::Matrix() : rows_(1), cols_(1)
 {
     allocSpace();
     p[0][0] = 0;
+    e[0][0] = 0;
 }
 
 Matrix::~Matrix()
@@ -48,8 +63,10 @@ Matrix::~Matrix()
     for (int i = 0; i < rows_; ++i)
     {
         delete[] p[i];
+        delete[] e[i];
     }
     delete[] p;
+    delete[] e;
 }
 
 Matrix::Matrix(const Matrix& m) : rows_(m.rows_), cols_(m.cols_)
@@ -60,6 +77,7 @@ Matrix::Matrix(const Matrix& m) : rows_(m.rows_), cols_(m.cols_)
         for (int j = 0; j < cols_; ++j)
         {
             p[i][j] = m.p[i][j];
+            e[i][j] = m.e[i][j];
         }
     }
 }
@@ -76,8 +94,10 @@ Matrix& Matrix::operator=(const Matrix& m)
         for (int i = 0; i < rows_; ++i)
         {
             delete[] p[i];
+            delete[] e[i];
         }
         delete[] p;
+        delete[] e;
 
         rows_ = m.rows_;
         cols_ = m.cols_;
@@ -89,6 +109,7 @@ Matrix& Matrix::operator=(const Matrix& m)
         for (int j = 0; j < cols_; ++j)
         {
             p[i][j] = m.p[i][j];
+            e[i][j] = m.e[i][j];
         }
     }
     return *this;
@@ -101,6 +122,7 @@ Matrix& Matrix::operator+=(const Matrix& m)
         for (int j = 0; j < cols_; ++j)
         {
             p[i][j] += m.p[i][j];
+            e[i][j] += m.e[i][j];
         }
     }
     return *this;
@@ -113,6 +135,7 @@ Matrix& Matrix::operator-=(const Matrix& m)
         for (int j = 0; j < cols_; ++j)
         {
             p[i][j] -= m.p[i][j];
+            e[i][j] -= m.e[i][j];
         }
     }
     return *this;
@@ -128,31 +151,34 @@ Matrix& Matrix::operator*=(const Matrix& m)
             for (int k = 0; k < cols_; ++k)
             {
                 temp.p[i][j] += (p[i][k] * m.p[k][j]);
+                temp.e[i][j] += (e[i][k] * m.e[k][j]);
             }
         }
     }
     return (*this = temp);
 }
 
-Matrix& Matrix::operator*=(double num)
+Matrix& Matrix::operator*=(int num)
 {
     for (int i = 0; i < rows_; ++i)
     {
         for (int j = 0; j < cols_; ++j)
         {
             p[i][j] *= num;
+            e[i][j] *= num;
         }
     }
     return *this;
 }
 
-Matrix& Matrix::operator/=(double num)
+Matrix& Matrix::operator/=(int num)
 {
     for (int i = 0; i < rows_; ++i)
     {
         for (int j = 0; j < cols_; ++j)
         {
             p[i][j] /= num;
+            e[i][j] /= num;
         }
     }
     return *this;
@@ -166,7 +192,7 @@ Matrix Matrix::operator^(int num)
 
 void Matrix::swapRows(int r1, int r2)
 {
-    double *temp = p[r1];
+    int *temp = p[r1];
     p[r1] = p[r2];
     p[r2] = temp;
 }
@@ -292,9 +318,9 @@ Matrix Matrix::bandSolve(Matrix A, Matrix b, int k)
 }
 
 // functions on VECTORS
-double Matrix::dotProduct(Matrix a, Matrix b)
+int Matrix::dotProduct(Matrix a, Matrix b)
 {
-    double sum = 0;
+    int sum = 0;
     for (int i = 0; i < a.rows_; ++i)
     {
         sum += (a(i, 0) * b(i, 0));
@@ -341,10 +367,10 @@ Matrix Matrix::gaussianEliminate()
                 pivot_found = true;
             } else { // check for a possible swap
                 int max_row = i;
-                double max_val = 0;
+                int max_val = 0;
                 for (int k = i + 1; k < rows; ++k)
                 {
-                    double cur_abs = Ab(k, j) >= 0 ? Ab(k, j) : -1 * Ab(k, j);
+                    int cur_abs = Ab(k, j) >= 0 ? Ab(k, j) : -1 * Ab(k, j);
                     if (cur_abs > max_val)
                     {
                         max_row = k;
@@ -533,10 +559,12 @@ Matrix Matrix::inverse()
 
 void Matrix::allocSpace()
 {
-    p = new double*[rows_];
+    p = new int*[rows_];
+    e = new int*[rows_];
     for (int i = 0; i < rows_; ++i)
     {
-        p[i] = new double[cols_];
+        p[i] = new int[cols_];
+        e[i] = new int[cols_];
     }
 }
 
@@ -577,18 +605,18 @@ Matrix operator*(const Matrix& m1, const Matrix& m2)
     return (temp *= m2);
 }
 
-Matrix operator*(const Matrix& m, double num)
+Matrix operator*(const Matrix& m, int num)
 {
     Matrix temp(m);
     return (temp *= num);
 }
 
-Matrix operator*(double num, const Matrix& m)
+Matrix operator*(int num, const Matrix& m)
 {
     return (m * num);
 }
 
-Matrix operator/(const Matrix& m, double num)
+Matrix operator/(const Matrix& m, int num)
 {
     Matrix temp(m);
     return (temp /= num);
@@ -601,7 +629,7 @@ ostream& operator<<(ostream& os, const Matrix& m)
         os << m.p[i][0];
         for (int j = 1; j < m.cols_; ++j)
         {
-            os << " " << m.p[i][j];
+            os << " " << m.p[i][j] << "(" << m.e[i][j] << ")";
         }
         os << endl;
     }

@@ -15,19 +15,24 @@
 /* CONSTRUCTEUR */
 /****************/
 
-Interface::Interface()
+Interface::Interface() : window(new RenderWindow(VideoMode(800, 800), "SFML works!")), rectangle(RectangleShape(Vector2f(10, 10))), matrix(Matrix(80, 80)), acteurs(vector<Acteur*>())
 {
-    window = new RenderWindow(VideoMode(200, 200), "SFML works!");
-    rectangle = new RectangleShape(Vector2f(100, 100));
-    rectangle->setFillColor(Color::Green);
-    acteur = new Acteur();
+    window->setFramerateLimit(20);
+}
+
+Interface::Interface(Matrix& A) : window(new RenderWindow(VideoMode(800, 800), "SFML works!")), rectangle(RectangleShape(Vector2f(10, 10))), matrix(A), acteurs(vector<Acteur*>())
+{
+    window->setFramerateLimit(20);
+}
+
+Interface::Interface(Matrix& A, vector<Acteur*>& acteurs) : window(new RenderWindow(VideoMode(800, 800), "SFML works!")), rectangle(RectangleShape(Vector2f(10, 10))), matrix(A), acteurs(acteurs)
+{
+    window->setFramerateLimit(20);
 }
 
 Interface::~Interface()
 {
     delete window;
-    delete rectangle;
-    delete acteur;
 }
 
 
@@ -46,7 +51,7 @@ void Interface::display()
         }
 
         window->clear();
-        window->draw(*rectangle);
+        //window->draw(rectangle);
         window->display();
     }
 }

@@ -40,7 +40,7 @@ class Acteur
         void setY(int y) { this->y = y; }
         
     private:
-        Matrix* A;
+        Matrix A;
         int x, y;
 };
 

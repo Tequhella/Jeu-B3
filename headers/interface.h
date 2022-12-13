@@ -25,8 +25,9 @@ class Interface
     private:
         RenderWindow* window;      // fenêtre
         Event event;               // évènement
-        RectangleShape* rectangle; // rectangle
-        Acteur* acteur;            // acteur
+        RectangleShape rectangle;  // rectangle
+        vector<Acteur*> acteurs;   // acteurs
+        Matrix matrix;             // matrice
 
     public:
     /****************/
@@ -37,6 +38,18 @@ class Interface
          * @brief Constructeur par défaut de la classe Interface
          */
         Interface();
+
+        /**
+         * @brief Constructeur de la classe Interface
+         * 
+         */
+        Interface(Matrix& A);
+
+        /**
+         * @brief Constructeur de la classe Interface
+         * 
+         */
+        Interface(Matrix& A, vector<Acteur*>& acteurs);
 
     
     /***************/
@@ -71,14 +84,22 @@ class Interface
          * 
          * @return RectangleShape* 
          */
-        RectangleShape* getRectangle() const { return rectangle; }
+        RectangleShape getRectangle() const { return rectangle; }
 
         /**
          * @brief Récupère l'acteur
          * 
-         * @return Acteur* 
+         * @return Acteur
+         * @param i
          */
-        Acteur* getActeur() const { return acteur; }
+        Acteur getActeur(int i) const { return *acteurs[i]; }
+
+        /**
+         * @brief Récupère l'acteur
+         * 
+         * @return vector<Acteur*>
+         */
+        vector<Acteur*> getActeurs() const { return acteurs; }
 
     /***********/
     /* SETTERS */
@@ -103,14 +124,15 @@ class Interface
          * 
          * @param rectangle 
          */
-        void setRectangle(RectangleShape* rectangle) { this->rectangle = rectangle; }
+        void setRectangle(RectangleShape rectangle) { this->rectangle = rectangle; }
 
         /**
          * @brief Définit l'acteur
          * 
-         * @param acteur 
+         * @param acteur
+         * @param i
          */
-        void setActeur(Acteur* acteur) { this->acteur = acteur; }
+        void setActeur(Acteur* acteur, int i) { this->acteurs[i] = acteur; }
 
     /************/
     /* METHODES */
