@@ -22,11 +22,11 @@ int main(int argc, char const *argv[])
 
     vector<Acteur*> acteurs;
 
-    acteurs.push_back(new Acteur(matrix, 10, 10));
-    acteurs.push_back(new Acteur(matrix, 20, 20));
-    acteurs.push_back(new Acteur(matrix, 30, 30));
+    srand(time(NULL));
 
-    RenderWindow window(VideoMode(LARGEUR, HAUTEUR), "SFML works!");
+    acteurs.push_back(new Acteur(matrix, 40, 30));
+
+    RenderWindow window(VideoMode(LARGEUR, HAUTEUR), "Jeu de la vie !");
 
     Interface interface(&window, acteurs, matrix);
 

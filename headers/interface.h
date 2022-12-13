@@ -66,7 +66,7 @@ class Interface
          * @param matrix la matrice
          * @param acteurs les acteurs
          */
-        Interface(RenderWindow* window, vector<Acteur*> acteurs, Matrix& matrix);
+        Interface(RenderWindow* window, vector<Acteur*>& acteurs, Matrix& matrix);
 
         /**
          * @brief Constructeur de la classe Interface
@@ -84,7 +84,7 @@ class Interface
          * @param acteurs les acteurs
          * @param matrix la matrice
          */
-        Interface(RenderWindow* window, RectangleShape& rectangle, vector<Acteur*> acteurs, Matrix& matrix);
+        Interface(RenderWindow* window, RectangleShape& rectangle, vector<Acteur*>& acteurs, Matrix& matrix);
 
 
     

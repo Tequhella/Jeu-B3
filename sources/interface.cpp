@@ -31,32 +31,27 @@ Interface::Interface() : window(new RenderWindow(VideoMode(LARGEUR, HAUTEUR), "S
 
 Interface::Interface(RenderWindow* window) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), matrix(Matrix(80, 60))
 {
-    window->setFramerateLimit(60);
-    window->setVerticalSyncEnabled(true);
+    window->setFramerateLimit(20);
 }
 
 Interface::Interface(RenderWindow* window, Matrix& matrix) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), matrix(matrix)
 {
-    window->setFramerateLimit(60);
-    window->setVerticalSyncEnabled(true);
+    window->setFramerateLimit(20);
 }
 
-Interface::Interface(RenderWindow* window, vector<Acteur*> acteurs, Matrix& matrix) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), acteurs(acteurs), matrix(matrix)
+Interface::Interface(RenderWindow* window, vector<Acteur*>& acteurs, Matrix& matrix) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), acteurs(acteurs), matrix(matrix)
 {
-    window->setFramerateLimit(60);
-    window->setVerticalSyncEnabled(true);
+    window->setFramerateLimit(20);
 }
 
 Interface::Interface(RenderWindow* window, RectangleShape& rectangle) : window(window), rectangle(rectangle), matrix(Matrix(80, 60))
 {
-    window->setFramerateLimit(60);
-    window->setVerticalSyncEnabled(true);
+    window->setFramerateLimit(20);
 }
 
-Interface::Interface(RenderWindow* window, RectangleShape& rectangle, vector<Acteur*> acteurs, Matrix& matrix) : window(window), rectangle(rectangle), acteurs(acteurs), matrix(matrix)
+Interface::Interface(RenderWindow* window, RectangleShape& rectangle, vector<Acteur*>& acteurs, Matrix& matrix) : window(window), rectangle(rectangle), acteurs(acteurs), matrix(matrix)
 {
-    window->setFramerateLimit(60);
-    window->setVerticalSyncEnabled(true);
+    window->setFramerateLimit(20);
 }
 
 
@@ -106,6 +101,8 @@ void Interface::display()
         }
 
         window->display();
+
+        sleep(milliseconds(100));
     }
 }
 
