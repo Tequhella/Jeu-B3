@@ -2,29 +2,37 @@ CC = g++
 
 CFLAGS = -Wall -g
 
+LIB = -lsfml-graphics -lsfml-window -lsfml-system
+
 SRCS = sources/
 
 OBJS = obj/
 
 HEADERS = headers/
 
-all: $(OBJS)main.o $(OBJS)matrix.o $(OBJS)acteur.o
-	$(CC) $(CFLAGS) -o main $(OBJS)main.o $(OBJS)matrix.o $(OBJS)acteur.o
+ifeq ($(OS),Windows_NT)
+	DLLEXT = .dll
+else
+	DLLEXT = .so
+endif
 
-$(OBJS)main.o: $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)acteur.h
-	$(CC) $(CFLAGS) -c $(SRCS)main.cpp -o $(OBJS)main.o
+all: $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteur$(DLLEXT) $(OBJS)interface$(DLLEXT)
+	$(CC) $(CFLAGS) -o main $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteur$(DLLEXT) $(OBJS)interface$(DLLEXT) $(LIB)
 
-$(OBJS)matrix.o: $(SRCS)matrix.cpp $(HEADERS)matrix.h
-	$(CC) $(CFLAGS) -c $(SRCS)matrix.cpp -o $(OBJS)matrix.o
+$(OBJS)main$(DLLEXT): $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)acteur.h $(HEADERS)interface.h
+	$(CC) $(CFLAGS) -c $(SRCS)main.cpp -o $(OBJS)main$(DLLEXT)
 
-$(OBJS)acteur.o: $(SRCS)acteur.cpp $(HEADERS)acteur.h
-	$(CC) $(CFLAGS) -c $(SRCS)acteur.cpp -o $(OBJS)acteur.o
+$(OBJS)matrix$(DLLEXT): $(SRCS)matrix.cpp $(HEADERS)matrix.h
+	$(CC) $(CFLAGS) -c $(SRCS)matrix.cpp -o $(OBJS)matrix$(DLLEXT)
 
-$(OBJS)interface.o: $(SRCS)interface.cpp $(HEADERS)interface.h
-	$(CC) $(CFLAGS) -c $(SRCS)interface.cpp -o $(OBJS)interface.o 
+$(OBJS)acteur$(DLLEXT): $(SRCS)acteur.cpp $(HEADERS)acteur.h
+	$(CC) $(CFLAGS) -c $(SRCS)acteur.cpp -o $(OBJS)acteur$(DLLEXT)
+
+$(OBJS)interface$(DLLEXT): $(SRCS)interface.cpp $(HEADERS)interface.h
+	$(CC) $(CFLAGS) -c $(SRCS)interface.cpp -o $(OBJS)interface$(DLLEXT) 
 
 packages:
 	sudo apt install libsfml-dev -y
 
 clean:
-	rm -f $(OBJS)*.o main
+	rm -f $(OBJS)*$(DLLEXT) main

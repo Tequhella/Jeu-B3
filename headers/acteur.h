@@ -12,7 +12,7 @@
 #ifndef __ACTEUR_H__
 #define __ACTEUR_H__
 
-#define LARGEUR_MAX 10
+#define LARGEUR_MAX 80
 
 #include <iostream>
 #include <string>

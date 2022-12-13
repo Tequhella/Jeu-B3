@@ -37,23 +37,16 @@ void Acteur::move(int x, int y)
     A.out(this->x, this->y);
     this->x += x;
     if (this->x < 0)
-    {
         this->x += LARGEUR_MAX;
-    }
     else if (this->x > LARGEUR_MAX)
-    {
         this->x -= LARGEUR_MAX;
-    }
 
     this->y += y;
     if (this->y < 0)
-    {
         this->y += LARGEUR_MAX;
-    }
     else if (this->y > LARGEUR_MAX)
-    {
         this->y -= LARGEUR_MAX;
-    }
+        
     A.in(this->x, this->y);
 }
 
