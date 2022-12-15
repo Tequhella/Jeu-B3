@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <string>
+#include <time.h>
 #include "matrix.h"
 
 class Acteur

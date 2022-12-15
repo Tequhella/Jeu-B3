@@ -1,6 +1,4 @@
 #include "../headers/acteur.h"
-#include <cstdlib>
-
 
 Acteur::Acteur()
 {
