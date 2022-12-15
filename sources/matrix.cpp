@@ -35,6 +35,7 @@ Matrix::Matrix(int** a, int rows, int cols) : rows_(rows), cols_(cols)
         {
             p[i][j] = a[i][j];
         }
+        
     }
 }
 
