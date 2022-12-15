@@ -1,7 +1,7 @@
 /**
  * @file main.cpp
  * @author Lilian CHARDON,
- * @brief 
+ * @brief Fichier du main, qui lance l'interface et le jeu
  * @version 0.1
  * @date 25-10-2022
  * 
@@ -10,7 +10,6 @@
  */
 #include <iostream>
 #include "../headers/matrix.h"
-#include "../headers/acteur.h"
 #include "../headers/interface.h"
 using namespace std;
 

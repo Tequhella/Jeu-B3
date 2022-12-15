@@ -1,7 +1,7 @@
 /**
  * @file acteur.h
  * @author Lilian CHARDON,
- * @brief 
+ * @brief Fichier des déclarations des méthodes de la classe Acteur
  * @version 0.1
  * @date 25-10-2022
  * 
@@ -12,12 +12,12 @@
 #ifndef __ACTEUR_H__
 #define __ACTEUR_H__
 
-#define LARGEUR_MAX 80
+#define LARGEUR_MAX 10
 
 #include <iostream>
 #include <string>
 #include <time.h>
-#include "matrix.h"
+#include "../matrix.h"
 
 class Acteur
 {
@@ -40,7 +40,7 @@ class Acteur
         void setX(int x) { this->x = x; }
         void setY(int y) { this->y = y; }
         
-    private:
+    protected:
         Matrix A;
         int x, y;
 };

@@ -1,4 +1,16 @@
-#include "../headers/acteur.h"
+/**
+ * @file acteur.cpp
+ * @author Lilian CHARDON
+ * @brief Fichier des définitions des méthodes de la classe Acteur
+ * @version 0.1
+ * @date 15-12-2022
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
+#include "../../headers/acteurs/acteur.h"
+
 
 Acteur::Acteur()
 {
@@ -12,7 +24,7 @@ Acteur::Acteur(Matrix& A) : A(A)
     srand(time(NULL));
     this->x = rand() % LARGEUR_MAX;
     this->y = rand() % LARGEUR_MAX;
-    this->A.in(this->x, this->y);
+    this->A.in(this->x, this->y, 0);
 }
 
 Acteur::Acteur(Matrix& A ,int x, int y): A(A), x(x), y(y)
@@ -22,7 +34,7 @@ Acteur::Acteur(Matrix& A ,int x, int y): A(A), x(x), y(y)
         std::cout << "Erreur : les coordonnées sont trop grandes" << std::endl;
         exit(1);
     }
-    this->A.in(this->x, this->y);
+    this->A.in(this->x, this->y, 0);
 }
 
 Acteur::~Acteur()
@@ -44,8 +56,8 @@ void Acteur::move(int x, int y)
         this->y += LARGEUR_MAX;
     else if (this->y > LARGEUR_MAX)
         this->y -= LARGEUR_MAX;
-        
-    A.in(this->x, this->y);
+
+    A.in(this->x, this->y, 0);
 }
 
 void Acteur::moveR()
@@ -54,5 +66,5 @@ void Acteur::moveR()
     A.out(this->x, this->y);
     this->x = rand() % LARGEUR_MAX;
     this->y = rand() % LARGEUR_MAX;
-    A.in(this->x, this->y);
+    A.in(this->x, this->y, 0);
 }

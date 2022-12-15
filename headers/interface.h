@@ -1,7 +1,7 @@
 /**
  * @file interface.h
  * @author Lilian CHARDON (lilian.chardon@ynov.com)
- * @brief 
+ * @brief Fichier des déclarations des méthodes de la classe Interface
  * @version 0.1
  * @date 06-12-2022
  * 
@@ -15,20 +15,13 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "acteur.h"
+#include "acteurs/acteur.h"
 
 using namespace std;
 using namespace sf;
 
 class Interface
 {
-    private:
-        RenderWindow* window;      // fenêtre
-        Event event;               // évènement
-        RectangleShape rectangle;  // rectangle
-        Matrix matrix;             // matrice
-        vector<Acteur*> acteurs;   // acteurs
-
     public:
     /****************/
     /* CONSTRUCTEUR */
@@ -150,6 +143,12 @@ class Interface
          */
         void close();
 
+    private:
+        RenderWindow* window;      // fenêtre
+        Event event;               // évènement
+        RectangleShape rectangle;  // rectangle
+        Matrix matrix;             // matrice
+        vector<Acteur*> acteurs;   // acteurs
 };
 
 #endif // __INTERFACE_H__

@@ -9,10 +9,17 @@
 #include <iostream>
 
 class Acteur;
+class Protagoniste;
+class Ennemi;
+class Marchandise;
 
 class Matrix
 {
     friend class Acteur;
+    friend class Protagoniste;
+    friend class Ennemi;
+    friend class Marchandise;
+
     public:
         Matrix(int, int);
         Matrix(int**, int, int);
@@ -59,8 +66,8 @@ class Matrix
         void allocSpace();
         Matrix expHelper(const Matrix&, int);
 
-        void in(int x, int y) {this->p[y][x]++;}
-        void out(int x, int y) {this->p[y][x]--;}
+        void in(int x, int y, int type) {this->e[y][x] += type;}
+        void out(int x, int y) {this->e[y][x] = 0;}
 };
 
 Matrix operator+(const Matrix&, const Matrix&);
