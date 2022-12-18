@@ -2,9 +2,9 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "jeu-cours" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "jeu-cours" ]
 
 jobs:
   build:
