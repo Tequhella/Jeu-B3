@@ -3,6 +3,7 @@
         "*.twig": "twig",
         "*.css": "css",
         "*.php": "php",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "iosfwd": "cpp"
     }
 }

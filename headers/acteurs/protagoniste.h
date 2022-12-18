@@ -109,7 +109,7 @@ class Protagoniste : public Acteur
     /************/
     /* METHODES */
     /************/
-
+        
         /**
          * @brief Prend une marchandise
          * 

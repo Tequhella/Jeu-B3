@@ -18,10 +18,10 @@ else
 	INCL =
 endif
 
-all: $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteurs/acteur$(DLLEXT) $(OBJS)acteurs/protagoniste$(DLLEXT) $(OBJS)acteurs/marchandise$(DLLEXT) $(OBJS)interface$(DLLEXT)
-	$(CC) $(CFLAGS) -o app $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteurs/acteur$(DLLEXT) $(OBJS)acteurs/protagoniste$(DLLEXT) $(OBJS)acteurs/marchandise$(DLLEXT) $(OBJS)interface$(DLLEXT) $(LIB)
+all: $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteurs/acteur$(DLLEXT) $(OBJS)acteurs/protagoniste$(DLLEXT) $(OBJS)acteurs/marchandise$(DLLEXT) $(OBJS)acteurs/ennemi$(DLLEXT) $(OBJS)interface$(DLLEXT)
+	$(CC) $(CFLAGS) -o app $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteurs/acteur$(DLLEXT) $(OBJS)acteurs/protagoniste$(DLLEXT) $(OBJS)acteurs/marchandise$(DLLEXT) $(OBJS)acteurs/ennemi$(DLLEXT) $(OBJS)interface$(DLLEXT) $(LIB)
 
-$(OBJS)main$(DLLEXT): $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)acteurs/acteur.h $(HEADERS)acteurs/protagoniste.h $(HEADERS)acteurs/marchandise.h $(HEADERS)interface.h
+$(OBJS)main$(DLLEXT): $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)acteurs/acteur.h $(HEADERS)acteurs/protagoniste.h $(HEADERS)acteurs/marchandise.h $(HEADERS)acteurs/ennemi.h $(HEADERS)interface.h
 ifneq ($(wildcard obj/.*),)
 	@echo "Found obj."
 else
@@ -47,6 +47,9 @@ $(OBJS)acteurs/protagoniste$(DLLEXT): $(SRCS)acteurs/protagoniste.cpp $(HEADERS)
 
 $(OBJS)acteurs/marchandise$(DLLEXT): $(SRCS)acteurs/marchandise.cpp $(HEADERS)acteurs/marchandise.h
 	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)acteurs/marchandise.cpp -o $(OBJS)acteurs/marchandise$(DLLEXT)
+
+$(OBJS)acteurs/ennemi$(DLLEXT): $(SRCS)acteurs/ennemi.cpp $(HEADERS)acteurs/ennemi.h
+	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)acteurs/ennemi.cpp -o $(OBJS)acteurs/ennemi$(DLLEXT)
 
 $(OBJS)interface$(DLLEXT): $(SRCS)interface.cpp $(HEADERS)interface.h
 	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)interface.cpp -o $(OBJS)interface$(DLLEXT) 

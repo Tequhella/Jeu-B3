@@ -37,6 +37,21 @@ Acteur::Acteur(Matrix& A ,int x, int y): A(A), x(x), y(y)
     this->A.in(this->x, this->y, 0);
 }
 
+Acteur::Acteur(Matrix& A, int x, int y, int type) : A(A), x(x), y(y), type(type)
+{
+    if (x > LARGEUR_MAX || y > LARGEUR_MAX)
+    {
+        std::cout << "Erreur : les coordonnées sont trop grandes" << std::endl;
+        exit(1);
+    }
+    this->A.in(this->x, this->y, this->type);
+}
+
+Acteur::Acteur(const Acteur& a) : A(a.A), x(a.x), y(a.y)
+{
+    this->A.in(this->x, this->y, 0);
+}
+
 Acteur::~Acteur()
 {
     
