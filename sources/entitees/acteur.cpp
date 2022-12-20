@@ -30,7 +30,7 @@ Acteur::Acteur(Matrix& A) : A(A)
     this->A.in(this->x, this->y, 0);
 }
 
-Acteur::Acteur(Matrix& A ,int x, int y): A(A), x(x), y(y)
+Acteur::Acteur(Matrix& A, int x, int y): A(A), x(x), y(y)
 {
     if (x > LARGEUR_MAX || y > LARGEUR_MAX)
     {
@@ -125,7 +125,7 @@ void Acteur::pickUp(Marchandise& m)
 
 void Acteur::pickUpAll(vector<Marchandise>& m)
 {
-    for (int i = 0; i < m.size(); i++)
+    for (unsigned int i = 0; i < m.size(); i++)
     {
         this->inventaire.push_back(m[i]);
     }
@@ -133,7 +133,7 @@ void Acteur::pickUpAll(vector<Marchandise>& m)
 
 void Acteur::dropOff(Marchandise& m)
 {
-    for (int i = 0; i < this->inventaire.size(); i++)
+    for (unsigned int i = 0; i < this->inventaire.size(); i++)
     {
         if (this->inventaire[i] == m)
         {

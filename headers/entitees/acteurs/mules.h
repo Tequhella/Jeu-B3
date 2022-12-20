@@ -64,6 +64,14 @@ class Mules : public Acteur
     /**************/
 
         /**
+         * @brief Surcharge de l'opérateur =
+         * 
+         * @param m 
+         * @return Mules& 
+         */
+        Mules& operator=(const Mules& m);
+
+        /**
          * @brief Surcharge de l'opérateur <<
          * 
          * @param os 

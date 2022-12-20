@@ -18,38 +18,50 @@ else
 	INCL =
 endif
 
-all: $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteur$(DLLEXT) $(OBJS)acteurs/protagoniste$(DLLEXT) $(OBJS)acteurs/marchandise$(DLLEXT) $(OBJS)acteurs/ennemi$(DLLEXT) $(OBJS)interface$(DLLEXT)
-	$(CC) $(CFLAGS) -o app $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)acteur$(DLLEXT) $(OBJS)acteurs/protagoniste$(DLLEXT) $(OBJS)acteurs/marchandise$(DLLEXT) $(OBJS)acteurs/ennemi$(DLLEXT) $(OBJS)interface$(DLLEXT) $(LIB)
+all: $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)entitee$(DLLEXT) $(OBJS)entitees/marchandise$(DLLEXT) $(OBJS)entitees/strands$(DLLEXT) $(OBJS)entitees/acteur$(DLLEXT) $(OBJS)entitees/acteurs/protagoniste$(DLLEXT) $(OBJS)entitees/acteurs/mules$(DLLEXT) $(OBJS)interface$(DLLEXT)
+	$(CC) $(CFLAGS) -o app $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)entitee$(DLLEXT) $(OBJS)entitees/marchandise$(DLLEXT) $(OBJS)entitees/strands$(DLLEXT) $(OBJS)entitees/acteur$(DLLEXT) $(OBJS)entitees/acteurs/protagoniste$(DLLEXT) $(OBJS)entitees/acteurs/mules$(DLLEXT) $(OBJS)interface$(DLLEXT) $(LIB)
 
-$(OBJS)main$(DLLEXT): $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)acteur.h $(HEADERS)acteurs/protagoniste.h $(HEADERS)acteurs/marchandise.h $(HEADERS)acteurs/ennemi.h $(HEADERS)interface.h
+$(OBJS)main$(DLLEXT): $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)entitee.h $(HEADERS)entitees/marchandise.h $(HEADERS)entitees/strands.h $(HEADERS)entitees/acteur.h $(HEADERS)entitees/acteurs/protagoniste.h $(HEADERS)entitees/acteurs/mules.h $(HEADERS)interface.h
 ifneq ($(wildcard obj/.*),)
 	@echo "Found obj."
 else
 	@echo "Did not find obj."
 	mkdir obj
-endif	
+endif
+ifneq ($(wildcard obj/entitees/.*),)
+	@echo "Found obj/entitees."
+else
+	@echo "Did not find obj/entitees."
+	mkdir obj/entitees
+endif
+ifneq ($(wildcard obj/entitees/acteurs/.*),)
+	@echo "Found obj/entitees/acteurs."
+else
+	@echo "Did not find obj/entitees/acteurs."
+	mkdir obj/entitees/acteurs
+endif
 	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)main.cpp -o $(OBJS)main$(DLLEXT)
 
 $(OBJS)matrix$(DLLEXT): $(SRCS)matrix.cpp $(HEADERS)matrix.h
 	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)matrix.cpp -o $(OBJS)matrix$(DLLEXT)
 
-$(OBJS)acteur$(DLLEXT): $(SRCS)acteur.cpp $(HEADERS)acteur.h
-ifneq ($(wildcard obj/acteurs/.*),)
-	@echo "Found obj/acteurs."
-else
-	@echo "Did not find obj/acteurs."
-	mkdir obj/acteurs
-endif
-	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)acteur.cpp -o $(OBJS)acteur$(DLLEXT)
+$(OBJS)entitee$(DLLEXT): $(SRCS)entitee.cpp $(HEADERS)entitee.h
+	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)entitee.cpp -o $(OBJS)entitee$(DLLEXT)
 
-$(OBJS)acteurs/protagoniste$(DLLEXT): $(SRCS)acteurs/protagoniste.cpp $(HEADERS)acteurs/protagoniste.h
-	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)acteurs/protagoniste.cpp -o $(OBJS)acteurs/protagoniste$(DLLEXT)
+$(OBJS)entitees/marchandise$(DLLEXT): $(SRCS)entitees/marchandise.cpp $(HEADERS)entitees/marchandise.h
+	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)entitees/marchandise.cpp -o $(OBJS)entitees/marchandise$(DLLEXT)
 
-$(OBJS)acteurs/marchandise$(DLLEXT): $(SRCS)acteurs/marchandise.cpp $(HEADERS)acteurs/marchandise.h
-	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)acteurs/marchandise.cpp -o $(OBJS)acteurs/marchandise$(DLLEXT)
+$(OBJS)entitees/strands$(DLLEXT): $(SRCS)entitees/strands.cpp $(HEADERS)entitees/strands.h
+	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)entitees/strands.cpp -o $(OBJS)entitees/strands$(DLLEXT)
 
-$(OBJS)acteurs/ennemi$(DLLEXT): $(SRCS)acteurs/ennemi.cpp $(HEADERS)acteurs/ennemi.h
-	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)acteurs/ennemi.cpp -o $(OBJS)acteurs/ennemi$(DLLEXT)
+$(OBJS)entitees/acteur$(DLLEXT): $(SRCS)entitees/acteur.cpp $(HEADERS)entitees/acteur.h
+	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)entitees/acteur.cpp -o $(OBJS)entitees/acteur$(DLLEXT)
+
+$(OBJS)entitees/acteurs/protagoniste$(DLLEXT): $(SRCS)entitees/acteurs/protagoniste.cpp $(HEADERS)entitees/acteurs/protagoniste.h
+	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)entitees/acteurs/protagoniste.cpp -o $(OBJS)entitees/acteurs/protagoniste$(DLLEXT)
+
+$(OBJS)entitees/acteurs/mules$(DLLEXT): $(SRCS)entitees/acteurs/mules.cpp $(HEADERS)entitees/acteurs/mules.h
+	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)entitees/acteurs/mules.cpp -o $(OBJS)entitees/acteurs/mules$(DLLEXT)
 
 $(OBJS)interface$(DLLEXT): $(SRCS)interface.cpp $(HEADERS)interface.h
 	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)interface.cpp -o $(OBJS)interface$(DLLEXT) 
@@ -58,4 +70,4 @@ packages:
 	sudo apt install libsfml-dev -y
 
 clean:
-	rm -f $(OBJS)*$(DLLEXT) $(OBJS)acteurs/*$(DLLEXT)  app
+	rm -f $(OBJS)*$(DLLEXT) $(OBJS)entitees/*$(DLLEXT) $(OBJS)entitees/acteurs/*$(DLLEXT) app

@@ -272,8 +272,8 @@ class Acteur : public Entitee
         
     protected:
         Matrix A;
-        int type;
         int x, y;
+        int type;
         int vie;
         int force;
         int vitesse;

@@ -15,7 +15,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "acteur.h"
+#include "entitees/acteur.h"
 
 using namespace std;
 using namespace sf;
