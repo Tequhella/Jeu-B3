@@ -12,12 +12,11 @@
 #ifndef __MARCHANDISE_H__
 #define __MARCHANDISE_H__
 
-#include "acteur.h"
-#include <list>
+#include "../entitee.h"
 
 using namespace std;
 
-class Marchandise : public Acteur
+class Marchandise : public Entitee
 {
     public:
     /****************/
@@ -86,9 +85,9 @@ class Marchandise : public Acteur
          */
         friend ostream& operator<<(ostream& os, const Marchandise& m);
 
-    /***********/
-    /* GETTERS */
-    /***********/
+    /**************/
+    /* ACCESSEURS */
+    /**************/
 
         /**
          * @brief Récupère la valeur de la marchandise
@@ -97,9 +96,9 @@ class Marchandise : public Acteur
          */
         int getValeur() const { return valeur; }
     
-    /***********/
-    /* SETTERS */
-    /***********/
+    /*************/
+    /* MUTATEURS */
+    /*************/
 
         /**
          * @brief Modifie la valeur de la marchandise

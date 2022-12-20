@@ -9,8 +9,11 @@
  * 
  */
 
-#include "../../headers/acteurs/acteur.h"
+#include "../../headers/entitees/acteur.h"
 
+/*****************/
+/* CONSTRUCTEURS */
+/*****************/
 
 Acteur::Acteur()
 {
@@ -52,12 +55,43 @@ Acteur::Acteur(const Acteur& a) : A(a.A), x(a.x), y(a.y)
     this->A.in(this->x, this->y, 0);
 }
 
+/***************/
+/* DESTRUCTEUR */
+/***************/
+
 Acteur::~Acteur()
 {
     
 }
 
-void Acteur::move(int x, int y)
+/***************/
+/* OPERATEURS  */
+/***************/
+
+Acteur& Acteur::operator=(const Acteur& a)
+{
+    this->A = a.A;
+    this->x = a.x;
+    this->y = a.y;
+    return *this;
+}
+
+ostream& operator<<(ostream& os, const Acteur& a)
+{
+    os << "Acteur : " << a.x << " " << a.y << endl;
+    return os;
+}
+
+/************/
+/* METHODES */
+/************/
+
+void Acteur::attaquer(Acteur& a)
+{
+    
+}
+
+void Acteur::deplacement(int x, int y)
 {
     A.out(this->x, this->y);
     this->x += x;
@@ -75,11 +109,73 @@ void Acteur::move(int x, int y)
     A.in(this->x, this->y, 0);
 }
 
-void Acteur::moveR()
+void Acteur::deplacementR()
 {
     srand(time(NULL));
     A.out(this->x, this->y);
     this->x = rand() % LARGEUR_MAX;
     this->y = rand() % LARGEUR_MAX;
     A.in(this->x, this->y, 0);
+}
+
+void Acteur::pickUp(Marchandise& m)
+{
+    this->inventaire.push_back(m);
+}
+
+void Acteur::pickUpAll(vector<Marchandise>& m)
+{
+    for (int i = 0; i < m.size(); i++)
+    {
+        this->inventaire.push_back(m[i]);
+    }
+}
+
+void Acteur::dropOff(Marchandise& m)
+{
+    for (int i = 0; i < this->inventaire.size(); i++)
+    {
+        if (this->inventaire[i] == m)
+        {
+            this->inventaire.erase(this->inventaire.begin() + i);
+            break;
+        }
+    }
+}
+
+void Acteur::dropOffAll()
+{
+    this->inventaire.clear();
+}
+
+void Acteur::rechargerEndurance()
+{
+    if (endurance < ENDURANCE_MAX)
+    {
+        endurance += 1;
+    }
+}
+
+void Acteur::rechargerEndurance(double e)
+{
+    if (endurance < ENDURANCE_MAX)
+    {
+        endurance += e;
+    }
+}
+
+void Acteur::diminuerEndurance()
+{
+    if (endurance > 0)
+    {
+        endurance -= 1;
+    }
+}
+
+void Acteur::diminuerEndurance(double e)
+{
+    if (endurance > 0)
+    {
+        endurance -= e;
+    }
 }

@@ -116,6 +116,26 @@ Matrix& Matrix::operator=(const Matrix& m)
     return *this;
 }
 
+bool Matrix::operator==(const Matrix& m) const
+{
+    if (rows_ != m.rows_ || cols_ != m.cols_)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < rows_; ++i)
+    {
+        for (int j = 0; j < cols_; ++j)
+        {
+            if (p[i][j] != m.p[i][j] || e[i][j] != m.e[i][j])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 Matrix& Matrix::operator+=(const Matrix& m)
 {
     for (int i = 0; i < rows_; ++i)

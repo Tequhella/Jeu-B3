@@ -12,11 +12,8 @@
 #ifndef __PROTAGONISTE_H__
 #define __PROTAGONISTE_H__
 
-#include "acteur.h"
-#include "marchandise.h"
+#include "../acteur.h"
 #include <vector>
-
-#define NB_MARCHANDISE_MAX 10
 
 using namespace std;
 
@@ -74,9 +71,9 @@ class Protagoniste : public Acteur
         friend ostream& operator<<(ostream& os, const Protagoniste& p);
 
     
-    /***********/
-    /* GETTERS */
-    /***********/
+    /**************/
+    /* ACCESSEURS */
+    /**************/
 
         /**
          * @brief Renvoie le nombre de marchandises que le protagoniste transporte
@@ -94,9 +91,16 @@ class Protagoniste : public Acteur
          */
         Marchandise getMarchandise(int i) const { return *inventaire[i];}
 
-    /***********/
-    /* SETTERS */
-    /***********/
+        /**
+         * @brief Renvoie l'endurance du protagoniste
+         * 
+         * @return double l'endurance du protagoniste
+         */
+        double getEndurance() const { return endurance; }
+
+    /*************/
+    /* MUTATEURS */
+    /*************/
 
         /**
          * @brief Modifie la marchandise à la position i
@@ -105,6 +109,13 @@ class Protagoniste : public Acteur
          * @param m la nouvelle marchandise
          */
         void setMarchandise(int i, Marchandise& m) { inventaire[i] = &m; }
+
+        /**
+         * @brief Modifie l'endurance du protagoniste
+         * 
+         * @param e la nouvelle endurance
+         */
+        void setEndurance(double e) { endurance = e; }
     
     /************/
     /* METHODES */
@@ -134,9 +145,31 @@ class Protagoniste : public Acteur
          */
         void dropOffAll();
 
+        /**
+         * @brief Recharge l'endurance du protagoniste
+         */
+        void rechargerEndurance();
+
+        /**
+         * @brief Recharge l'endurance du protagoniste d'une certaine valeur
+         */
+        void rechargerEndurance(double e);
+
+        /**
+         * @brief Diminue l'endurance du protagoniste
+         */
+        void diminuerEndurance();
+
+        /**
+         * @brief Diminue l'endurance du protagoniste d'une certaine valeur
+         */
+        void diminuerEndurance(double e);
+
+
     private:
+        double endurance;
+        int    nbMarchandise;
         vector<Marchandise*> inventaire;
-        int nbMarchandise;
 };
 
 #endif // __PROTAGONISTE_H__

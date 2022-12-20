@@ -9,7 +9,7 @@
  * 
  */
 
-#include "../../headers/acteurs/protagoniste.h"
+#include "../../../headers/entitees/acteurs/protagoniste.h"
 
 /****************/
 /* CONSTRUCTEUR */

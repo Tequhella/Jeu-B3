@@ -7,17 +7,12 @@
 
 #include <iostream>
 
-class Acteur;
-class Protagoniste;
-class Ennemi;
-class Marchandise;
+class Entitee;
 
 class Matrix
 {
+    friend class Entitee;
     friend class Acteur;
-    friend class Protagoniste;
-    friend class Ennemi;
-    friend class Marchandise;
 
 public:
     /*****************/
@@ -83,6 +78,14 @@ public:
      * @return Matrix& la matrice copiée
      */
     Matrix &operator=(const Matrix &);
+
+    /**
+     * @brief Surcharge de l'opérateur de comparaison
+     * 
+     * @param m la matrice à comparer
+     * @return true si les matrices sont égales
+     */
+    bool operator==(const Matrix &) const;
 
     /**
      * @brief Surcharge de l'opérateur d'accès

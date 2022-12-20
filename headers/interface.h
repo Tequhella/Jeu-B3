@@ -15,7 +15,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "acteurs/acteur.h"
+#include "acteur.h"
 
 using namespace std;
 using namespace sf;
@@ -54,9 +54,9 @@ class Interface
          */
         ~Interface();
 
-    /***********/
-    /* GETTERS */
-    /***********/
+    /**************/
+    /* ACCESSEURS */
+    /**************/
 
         /**
          * @brief Récupère la fenêtre
@@ -94,9 +94,9 @@ class Interface
          */
         vector<Acteur*> getActeurs() const { return acteurs; }
 
-    /***********/
-    /* SETTERS */
-    /***********/
+    /*************/
+    /* MUTATEURS */
+    /*************/
 
         /**
          * @brief Définit la fenêtre

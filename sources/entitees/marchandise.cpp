@@ -9,19 +9,19 @@
  * 
  */
 
-#include "../../headers/acteurs/marchandise.h"
+#include "../../headers/entitees/marchandise.h"
 
 /****************/
 /* CONSTRUCTEUR */
 /****************/
 
-Marchandise::Marchandise() : Acteur(){}
+Marchandise::Marchandise() : Entitee(){}
 
-Marchandise::Marchandise(Matrix& A) : Acteur(A){}
+Marchandise::Marchandise(Matrix& A) : Entitee(A){}
 
-Marchandise::Marchandise(Matrix& A, int x, int y) : Acteur(A, x, y){}
+Marchandise::Marchandise(Matrix& A, int x, int y) : Entitee(A, x, y){}
 
-Marchandise::Marchandise(const Marchandise& m) : Acteur((Matrix&)m.A, (int)m.x, (int)m.y){}
+Marchandise::Marchandise(const Marchandise& m) : Entitee((Matrix&)m.A, (int)m.x, (int)m.y){}
 
 /***************/
 /* DESTRUCTEUR */
