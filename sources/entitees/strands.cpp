@@ -17,11 +17,11 @@
 
 Strands::Strands() : Entitee(){}
 
-Strands::Strands(Matrix& A) : Entitee(A){}
+Strands::Strands(Matrix& A) : Entitee(&A){}
 
-Strands::Strands(Matrix& A, int x, int y) : Entitee(A, x, y){}
+Strands::Strands(Matrix& A, int x, int y) : Entitee(&A, x, y){}
 
-Strands::Strands(const Strands& s) : Entitee((Matrix&)s.A, (int)s.x, (int)s.y){}
+Strands::Strands(const Strands& s) : Entitee((Matrix*)s.A, (int)s.x, (int)s.y){}
 
 /***************/
 /* DESTRUCTEUR */

@@ -10,17 +10,21 @@
  */
 #include <iostream>
 #include "../headers/matrix.h"
-#include "../headers/interface.h"
+#include "../headers/entitees/acteurs/protagoniste.h"
+#include "../headers/entitees/acteurs/mules.h"
+#include "../headers/entitees/marchandise.h"
+#include "../headers/entitees/strands.h"
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
+    Matrix A(LARGEUR_MAX, LARGEUR_MAX);
+    
+    Entitee e(&A, 1, 0, MARCHANDISE);
 
-    Interface* interface = new Interface();
+    cout << e << endl;
 
-    interface->display();
-
-    delete interface;
+    cout << A << endl;
     
     return 0;
 }

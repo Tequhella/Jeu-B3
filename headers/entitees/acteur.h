@@ -12,16 +12,14 @@
 #ifndef __ACTEUR_H__
 #define __ACTEUR_H__
 
-#define LARGEUR_MAX 80
+#define LARGEUR_MAX 20
 #define NB_MARCHANDISE_MAX 10
 #define ENDURANCE_MAX 100
 
-enum Type
+enum TypeActeur
 {
     PROTAGONISTE,
-    MARCHANDISE,
-    ENNEMI,
-    OBSTACLE
+    MULE
 };
 
 #include <iostream>

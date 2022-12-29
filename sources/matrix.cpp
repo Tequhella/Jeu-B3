@@ -647,8 +647,7 @@ ostream& operator<<(ostream& os, const Matrix& m)
 {
     for (int i = 0; i < m.rows_; ++i)
     {
-        os << m.p[i][0];
-        for (int j = 1; j < m.cols_; ++j)
+        for (int j = 0; j < m.cols_; ++j)
         {
             os << " " << m.p[i][j] << "(" << m.e[i][j] << ")";
         }

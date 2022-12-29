@@ -15,52 +15,57 @@
 /* CONSTRUCTEURS */
 /*****************/
 
-Entitee::Entitee() : x(0), y(0), A(Matrix(1, 1))
+Entitee::Entitee() : x(0), y(0), A(new Matrix(1, 1))
 {
-    A.in(0, 0, 0);
+    A->in(0, 0, 0);
 }
 
-Entitee::Entitee(Matrix& A) : x(0), y(0), A(A)
+Entitee::Entitee(Matrix* A) : x(0), y(0), A(A)
 {
-    A.in(0, 0, 0);
+    A->in(0, 0, 0);
 }
 
-Entitee::Entitee(Matrix& _A, int _x, int _y) : x(_x), y(_y), A(_A)
+Entitee::Entitee(Matrix* _A, int _x, int _y) : x(_x), y(_y), A(_A)
 {
-    A.in(_x, _y, 0);
+    A->in(_x, _y, 0);
 }
 
-Entitee::Entitee(const Entitee& e) : x(e.x), y(e.y), A(e.A){}
+Entitee::Entitee(Matrix* _A, int _x, int _y, int _type) : x(_x), y(_y), type(_type), A(_A)
+{
+    A->in(_x, _y, type);
+}
+
+Entitee::Entitee(const Entitee& _e) : x(_e.x), y(_e.y), A(_e.A){}
 
 /***************/
 /* DESTRUCTEUR */
 /***************/
 
-Entitee::~Entitee() {}
+Entitee::~Entitee()
+{
+    
+}
 
 /**************/
 /* OPERATEURS */
 /**************/
 
-Entitee& Entitee::operator=(const Entitee& e)
+Entitee& Entitee::operator=(const Entitee& _e)
 {
-    x = e.x;
-    y = e.y;
-    A = e.A;
+    x = _e.x;
+    y = _e.y;
+    A = _e.A;
     return *this;
 }
 
-bool Entitee::operator==(const Entitee& e)
+bool Entitee::operator==(const Entitee& _e)
 {
-    return (x == e.x && y == e.y && A == e.A);
+    return (x == _e.x && y == _e.y && A == _e.A);
 }
 
-ostream& operator<<(ostream& os, const Entitee& e)
+ostream& operator<<(ostream& _os, const Entitee& _e)
 {
-    os << "Entitee : " << endl;
-    os << "x : " << e.x << endl;
-    os << "y : " << e.y << endl;
-    os << "A : " << endl;
-    os << e.A;
-    return os;
+    _os << "Entitee : " << endl;
+    _os << "Position : (" << _e.x << ", " << _e.y << ")" << endl;
+    return _os;
 }

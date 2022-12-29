@@ -15,13 +15,21 @@
 /* CONSTRUCTEUR */
 /****************/
 
-Marchandise::Marchandise() : Entitee(){}
+Marchandise::Marchandise() : Entitee(), valeur(0), nomMarchandise("default")
+{
+    type = 0;
+}
 
-Marchandise::Marchandise(Matrix& A) : Entitee(A){}
+Marchandise::Marchandise(Matrix& _A) : Entitee(&_A), valeur(0), nomMarchandise("default")
+{
+    type = 0;
+}
 
-Marchandise::Marchandise(Matrix& A, int x, int y) : Entitee(A, x, y){}
+Marchandise::Marchandise(Matrix& _A, int _x, int _y) : Entitee(&_A, _x, _y, 0), valeur(0), nomMarchandise("default"){}
 
-Marchandise::Marchandise(const Marchandise& m) : Entitee((Matrix&)m.A, (int)m.x, (int)m.y){}
+Marchandise::Marchandise(Matrix& _A, int _x, int _y, int _valeur, string _nomMarchandise, int _type) : Entitee(&_A, _x, _y, _type), valeur(_valeur), nomMarchandise(_nomMarchandise){}
+
+Marchandise::Marchandise(const Marchandise& _m) : Entitee((Matrix*)_m.A, (int)_m.x, (int)_m.y, (int)_m.type), valeur(_m.valeur), nomMarchandise(_m.nomMarchandise){}
 
 /***************/
 /* DESTRUCTEUR */
@@ -39,17 +47,22 @@ Marchandise& Marchandise::operator=(const Marchandise& m)
     x = m.x;
     y = m.y;
     valeur = m.valeur;
+    nomMarchandise = m.nomMarchandise;
+    type = m.type;
     return *this;
 }
 
 bool Marchandise::operator==(const Marchandise& m) const
 {
-    return (x == m.x && y == m.y && valeur == m.valeur);
+    return (x == m.x && y == m.y && A == m.A && valeur == m.valeur && nomMarchandise == m.nomMarchandise && type == m.type);
 }
 
 ostream& operator<<(ostream& os, const Marchandise& m)
 {
     os << "Marchandise : " << endl;
     os << "Position : (" << m.x << ", " << m.y << ")" << endl;
+    os << "valeur : " << m.valeur << endl;
+    os << "nomMarchandise : " << m.nomMarchandise << endl;
+    os << "type : " << m.type << endl;
     return os;
 }

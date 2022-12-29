@@ -284,7 +284,7 @@ private:
      * @param y la position y de l'entité
      * @param type le type de l'entité
      */
-    void in(int x, int y, int type) { this->e[y][x] += type; }
+    void in(int x, int y, int type) { this->e[y][x] = type; }
 
     /**
      * @brief permet de retirer une entité à la matrice
@@ -329,7 +329,7 @@ Matrix operator*(const Matrix &, const Matrix &);
  * @param n le scalaire
  * @return Matrix la matrice résultat
  */
-Matrix operator*(const Matrix &, double);
+Matrix operator*(const Matrix &, int);
 
 /**
  * @brief Surcharge de l'opérateur de multiplication par un scalaire
@@ -338,7 +338,7 @@ Matrix operator*(const Matrix &, double);
  * @param m la matrice
  * @return Matrix la matrice résultat
  */
-Matrix operator*(double, const Matrix &);
+Matrix operator*(int, const Matrix &);
 
 /**
  * @brief Surcharge de l'opérateur de division par un scalaire
@@ -347,6 +347,6 @@ Matrix operator*(double, const Matrix &);
  * @param n le scalaire
  * @return Matrix la matrice résultat
  */
-Matrix operator/(const Matrix &, double);
+Matrix operator/(const Matrix &, int);
 
 #endif

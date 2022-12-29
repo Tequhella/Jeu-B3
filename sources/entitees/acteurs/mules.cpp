@@ -41,6 +41,13 @@ Mules& Mules::operator=(const Mules& m)
     return *this;
 }
 
+ostream& operator<<(ostream& os, const Mules& m)
+{
+    os << "Mules : " << endl;
+    os << "Position : (" << m.x << ", " << m.y << ")" << endl;
+    return os;
+}
+
 /************/
 /* METHODES */
 /************/

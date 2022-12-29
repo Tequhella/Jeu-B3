@@ -12,6 +12,7 @@
 #ifndef __MARCHANDISE_H__
 #define __MARCHANDISE_H__
 
+#include <string>
 #include "../entitee.h"
 
 using namespace std;
@@ -31,25 +32,37 @@ class Marchandise : public Entitee
         /**
          * @brief Constructeur avec une matrice
          * 
-         * @param A la matrice dans laquelle la marchandise se trouve
+         * @param _A la matrice dans laquelle la marchandise se trouve
          */
-        Marchandise(Matrix& A);
+        Marchandise(Matrix& _A);
 
         /**
          * @brief Constructeur avec une matrice et une position
          * 
-         * @param A la matrice dans laquelle la marchandise se trouve
-         * @param x la position en x de la marchandise
-         * @param y la position en y de la marchandise
+         * @param _A la matrice dans laquelle la marchandise se trouve
+         * @param _x la position en x de la marchandise
+         * @param _y la position en y de la marchandise
          */
-        Marchandise(Matrix& A, int x, int y);
+        Marchandise(Matrix& _A, int _x, int _y);
+
+        /**
+         * @brief Constructeur avec une matrice, une position et un type
+         * 
+         * @param _A la matrice dans laquelle la marchandise se trouve
+         * @param _x la position en x de la marchandise
+         * @param _y la position en y de la marchandise
+         * @param _valeur la valeur de la marchandise
+         * @param _nomMarchandise le nom de la marchandise
+         * @param _type le type de la marchandise
+         */
+        Marchandise(Matrix& _A, int _x, int _y, int _valeur, string _nom, int _type);
 
         /**
          * @brief Constructeur de copie
          * 
          * @param m la marchandise à copier
          */
-        Marchandise(const Marchandise& m);
+        Marchandise(const Marchandise& _m);
 
     /***************/
     /* DESTRUCTEUR */
@@ -67,23 +80,23 @@ class Marchandise : public Entitee
         /**
          * @brief Opérateur d'affectation
          * 
-         * @param m la marchandise à copier
+         * @param _m la marchandise à copier
          * @return Marchandise& la marchandise copiée
          */
-        Marchandise& operator=(const Marchandise& m);
+        Marchandise& operator=(const Marchandise& _m);
 
         /**
          * @brief Opérateur de comparaison
          * 
-         * @param m la marchandise à comparer
+         * @param _m la marchandise à comparer
          * @return true si les deux marchandises sont égales
          */
-        bool operator==(const Marchandise& m) const;
+        bool operator==(const Marchandise& _m) const;
 
         /**
          * @brief Affiche la marchandise
          */
-        friend ostream& operator<<(ostream& os, const Marchandise& m);
+        friend ostream& operator<<(ostream& _os, const Marchandise& _m);
 
     /**************/
     /* ACCESSEURS */
@@ -105,10 +118,11 @@ class Marchandise : public Entitee
          * 
          * @param valeur la nouvelle valeur de la marchandise
          */
-        void setValeur(int valeur) { this->valeur = valeur; }
+        void setValeur(int _valeur) { this->valeur = _valeur; }
 
     private:
-        int valeur;
+        int  valeur;
+        string nomMarchandise;
 
 };
 

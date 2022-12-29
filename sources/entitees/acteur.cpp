@@ -20,39 +20,38 @@ Acteur::Acteur()
     srand(time(NULL));
     this->x = rand() % LARGEUR_MAX;
     this->y = rand() % LARGEUR_MAX;
+    Entitee(&A, x, y, ACTEUR);
 }
 
-Acteur::Acteur(Matrix& A) : A(A)
+Acteur::Acteur(Matrix& A)
 {
     srand(time(NULL));
     this->x = rand() % LARGEUR_MAX;
     this->y = rand() % LARGEUR_MAX;
-    this->A.in(this->x, this->y, 0);
+    Entitee(&A, x, y, ACTEUR);
 }
 
-Acteur::Acteur(Matrix& A, int x, int y): A(A), x(x), y(y)
+Acteur::Acteur(Matrix& A, int x, int y): Entitee(&A, x, y, ACTEUR)
 {
     if (x > LARGEUR_MAX || y > LARGEUR_MAX)
     {
-        std::cout << "Erreur : les coordonnées sont trop grandes" << std::endl;
+        cout << "Erreur : les coordonnées sont trop grandes" << endl;
         exit(1);
     }
-    this->A.in(this->x, this->y, 0);
 }
 
-Acteur::Acteur(Matrix& A, int x, int y, int type) : A(A), x(x), y(y), type(type)
+Acteur::Acteur(Matrix& A, int x, int y, int type) : Entitee(&A, x, y, ACTEUR), type(type)
 {
     if (x > LARGEUR_MAX || y > LARGEUR_MAX)
     {
-        std::cout << "Erreur : les coordonnées sont trop grandes" << std::endl;
+        cout << "Erreur : les coordonnées sont trop grandes" << endl;
         exit(1);
     }
-    this->A.in(this->x, this->y, this->type);
 }
 
 Acteur::Acteur(const Acteur& a) : A(a.A), x(a.x), y(a.y)
 {
-    this->A.in(this->x, this->y, 0);
+    this->A.in(this->x, this->y, ACTEUR);
 }
 
 /***************/

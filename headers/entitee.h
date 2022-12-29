@@ -15,6 +15,13 @@
 #include <iostream>
 #include "matrix.h"
 
+enum TypeEntitee
+{
+    ACTEUR,
+    MARCHANDISE,
+    STRANDS
+};
+
 using namespace std;
 
 class Entitee
@@ -33,13 +40,19 @@ class Entitee
          * @brief Constructeur de la classe Entitee
          * 
          */
-        Entitee(Matrix& A);
+        Entitee(Matrix* _A);
 
         /**
          * @brief Constructeur de la classe Entitee
          * 
          */
-        Entitee(Matrix& A, int x, int y);
+        Entitee(Matrix* _A, int _x, int _y);
+
+        /**
+         * @brief Constructeur de la classe Entitee
+         * 
+         */
+        Entitee(Matrix* _A, int _x, int _y, int _type);
 
         /**
          * @brief Constructeur de la classe Entitee
@@ -64,27 +77,27 @@ class Entitee
         /**
          * @brief Opérateur d'affectation de la classe Entitee
          * 
-         * @param e 
+         * @param _e 
          * @return Entitee& 
          */
-        Entitee& operator=(const Entitee& e);
+        Entitee& operator=(const Entitee& _e);
 
         /**
          * @brief Opérateur de comparaison de la classe Entitee
          * 
-         * @param e
+         * @param _e
          * @return true
          */
-        bool operator==(const Entitee& e);
+        bool operator==(const Entitee& _e);
 
         /**
          * @brief Opérateur de flux de la classe Entitee
          * 
-         * @param os
-         * @param e
+         * @param _os
+         * @param _e
          * @return ostream&
          */
-        friend ostream& operator<<(ostream& os, const Entitee& e);
+        friend ostream& operator<<(ostream& _os, const Entitee& _e);
 
     /**************/
     /* ACCESSEURS */
@@ -109,7 +122,7 @@ class Entitee
          * 
          * @return Matrix la matrice de l'entitee
          */
-        Matrix getMatrice() const { return A; }
+        Matrix getMatrice() const { return *A; }
 
     /*************/
     /* MUTATEURS */
@@ -134,13 +147,13 @@ class Entitee
          * 
          * @param _m la matrice de l'entitee
          */
-        void setMatrice(Matrix& _m) { this->A = _m; }
+        void setMatrice(Matrix& _m) { this->A = &_m; }
 
     protected:
         int x;
         int y;
         int type;
-        Matrix A;
+        Matrix* A;
 };
 
 #endif // __ENTITEE_H__
