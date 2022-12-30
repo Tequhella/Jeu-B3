@@ -34,20 +34,25 @@ class Mules : public Acteur
         /**
          * @brief Constructeur de la classe Mules
          * 
+         * @param _A la matrice de l'entitee
          */
-        Mules(Matrix& A);
+        Mules(Matrix* _A);
 
         /**
          * @brief Constructeur de la classe Mules
          * 
+         * @param _A la matrice de l'entitee
+         * @param _x la position x de l'entitee
+         * @param _y la position y de l'entitee
          */
-        Mules(Matrix& A, int x, int y);
+        Mules(Matrix* _A, int _x, int _y);
 
         /**
-         * @brief Constructeur de la classe Mules
+         * @brief Constructeur par copie de la classe Mules
          * 
+         * @param _m la mule a copier
          */
-        Mules(const Mules& m);
+        Mules(const Mules& _m);
 
     
     /***************/
@@ -66,71 +71,29 @@ class Mules : public Acteur
         /**
          * @brief Surcharge de l'opérateur =
          * 
-         * @param m 
+         * @param _m 
          * @return Mules& 
          */
-        Mules& operator=(const Mules& m);
+        Mules& operator=(const Mules& _m);
 
         /**
          * @brief Surcharge de l'opérateur <<
          * 
-         * @param os 
-         * @param m 
+         * @param _os 
+         * @param _m 
          * @return ostream& 
          */
-        friend ostream& operator<<(ostream& os, const Mules& m);
+        friend ostream& operator<<(ostream& _os, const Mules& _m);
     
     /*************/
     /* ACCESSEUR */
     /*************/
 
-        /**
-         * @brief Retourne le nombre de marchandises du mule
-         * 
-         * @return int 
-         */
-        int getNbMarchandises() const { return inventaire.size(); }
-
-        /**
-         * @brief Retourne la liste des marchandises du mule
-         * 
-         * @return vector<Marchandise> 
-         */
-        vector<Marchandise> getMarchandises() const { return inventaire; }
-
-        /**
-         * @brief Retourne la marchandise à l'indice i
-         * 
-         * @param i 
-         * @return Marchandise 
-         */
-        Marchandise getMarchandise(int i) const { return inventaire[i]; }
-
-        /**
-         * @brief Retourne l'endurance du mule
-         * 
-         * @return double 
-         */
-        double getEndurance() const { return endurance; }
 
     /*************/
     /* MUTATEURS */
     /*************/
 
-        /**
-         * @brief Modifie la marchandise à la position i
-         * 
-         * @param i la position de la marchandise
-         * @param m la nouvelle marchandise
-         */
-        void setMarchandise(int i, Marchandise& m) { inventaire[i] = m; }
-
-        /**
-         * @brief Modifie l'endurance du protagoniste
-         * 
-         * @param e la nouvelle endurance
-         */
-        void setEndurance(double e) { endurance = e; }
     
     /************/
     /* METHODES */
@@ -139,9 +102,9 @@ class Mules : public Acteur
         /**
          * @brief Poursuit le protagoniste
          * 
-         * @param p 
+         * @param _p 
          */
-        void poursuite(Protagoniste& p);
+        void poursuite(Protagoniste& _p);
     
     /*************/
     /* ATTRIBUTS */

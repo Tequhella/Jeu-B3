@@ -291,8 +291,9 @@ private:
      * 
      * @param x la position x de l'entité
      * @param y la position y de l'entité
+     * @param type le type de l'entité
      */
-    void out(int x, int y) { this->e[y][x] = 0; }
+    void out(int x, int y, int type) { this->e[y][x] -= type; }
 };
 
 /**

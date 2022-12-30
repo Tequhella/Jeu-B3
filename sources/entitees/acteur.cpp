@@ -15,43 +15,74 @@
 /* CONSTRUCTEURS */
 /*****************/
 
-Acteur::Acteur()
+Acteur::Acteur() :
+    typeActeur(0),
+    vie(100),
+    force(10),
+    vitesse(10),
+    endurance(10),
+    direction(BAS),
+    inventaire()
 {
+    Matrix A(LARGEUR_MAX, LARGEUR_MAX);
     srand(time(NULL));
     this->x = rand() % LARGEUR_MAX;
     this->y = rand() % LARGEUR_MAX;
     Entitee(&A, x, y, ACTEUR);
 }
 
-Acteur::Acteur(Matrix& A)
+Acteur::Acteur(Matrix* _A) :
+    typeActeur(0),
+    vie(100),
+    force(10),
+    vitesse(10),
+    endurance(10),
+    direction(BAS),
+    inventaire()
 {
     srand(time(NULL));
     this->x = rand() % LARGEUR_MAX;
     this->y = rand() % LARGEUR_MAX;
-    Entitee(&A, x, y, ACTEUR);
+    Entitee(_A, x, y, ACTEUR);
 }
 
-Acteur::Acteur(Matrix& A, int x, int y): Entitee(&A, x, y, ACTEUR)
+Acteur::Acteur(Matrix* _A, int _x, int _y) :
+    Entitee(_A, _x, _y, ACTEUR),
+    typeActeur(0),
+    vie(100),
+    force(10),
+    vitesse(10),
+    endurance(10),
+    direction(BAS),
+    inventaire()
 {
-    if (x > LARGEUR_MAX || y > LARGEUR_MAX)
-    {
-        cout << "Erreur : les coordonnées sont trop grandes" << endl;
-        exit(1);
-    }
+    
 }
 
-Acteur::Acteur(Matrix& A, int x, int y, int type) : Entitee(&A, x, y, ACTEUR), type(type)
+Acteur::Acteur(Matrix* _A, int _x, int _y, int _type) : 
+    Entitee(_A, _x, _y, ACTEUR),
+    typeActeur(_type), 
+    vie(100), 
+    force(10), 
+    vitesse(10), 
+    endurance(10), 
+    direction(BAS),
+    inventaire()
 {
-    if (x > LARGEUR_MAX || y > LARGEUR_MAX)
-    {
-        cout << "Erreur : les coordonnées sont trop grandes" << endl;
-        exit(1);
-    }
+
 }
 
-Acteur::Acteur(const Acteur& a) : A(a.A), x(a.x), y(a.y)
+Acteur::Acteur(const Acteur& _a) :
+    Entitee((Matrix*)_a.A, (int)_a.x, (int)_a.y, (int)_a.type), 
+    typeActeur(_a.typeActeur), 
+    vie(_a.vie), 
+    force(_a.force), 
+    vitesse(_a.vitesse), 
+    endurance(_a.endurance), 
+    direction(_a.direction),
+    inventaire(_a.inventaire)
 {
-    this->A.in(this->x, this->y, ACTEUR);
+    
 }
 
 /***************/
@@ -67,54 +98,66 @@ Acteur::~Acteur()
 /* OPERATEURS  */
 /***************/
 
-Acteur& Acteur::operator=(const Acteur& a)
+Acteur& Acteur::operator=(const Acteur& _a)
 {
-    this->A = a.A;
-    this->x = a.x;
-    this->y = a.y;
+    this->A = _a.A;
+    this->x = _a.x;
+    this->y = _a.y;
     return *this;
 }
 
-ostream& operator<<(ostream& os, const Acteur& a)
+ostream& operator<<(ostream& _os, const Acteur& _a)
 {
-    os << "Acteur : " << a.x << " " << a.y << endl;
-    return os;
+    _os << "Acteur : " << _a.x << " " << _a.y << endl;
+    return _os;
 }
 
 /************/
 /* METHODES */
 /************/
 
-void Acteur::attaquer(Acteur& a)
+void Acteur::attaquer(Acteur& _a)
 {
-    
+    _a.vie -= this->force;
 }
 
-void Acteur::deplacement(int x, int y)
+void Acteur::deplacement(int _x, int _y)
 {
-    A.out(this->x, this->y);
-    this->x += x;
+    A->out(this->x, this->y, ACTEUR + this->type);
+
+    // On vérifie que le déplacement ne sort pas de la map
+    this->x += _x;
     if (this->x < 0)
         this->x += LARGEUR_MAX;
     else if (this->x > LARGEUR_MAX)
         this->x -= LARGEUR_MAX;
 
-    this->y += y;
+    this->y += _y;
     if (this->y < 0)
         this->y += LARGEUR_MAX;
     else if (this->y > LARGEUR_MAX)
         this->y -= LARGEUR_MAX;
 
-    A.in(this->x, this->y, 0);
+    // On vérifie la direction
+    if (_x == 0 && _y == -1)
+        this->direction = HAUT;
+    else if (_x == 0 && _y == 1)
+        this->direction = BAS;
+    else if (_x == -1 && _y == 0)
+        this->direction = GAUCHE;
+    else if (_x == 1 && _y == 0)
+        this->direction = DROITE;
+
+    A->in(this->x, this->y, ACTEUR + this->type);
 }
 
 void Acteur::deplacementR()
 {
     srand(time(NULL));
-    A.out(this->x, this->y);
+    A->out(this->x, this->y, ACTEUR + this->type);
     this->x = rand() % LARGEUR_MAX;
     this->y = rand() % LARGEUR_MAX;
-    A.in(this->x, this->y, 0);
+    A->in(this->x, this->y, ACTEUR + this->type);
 }
 
 void Acteur::pickUp(Marchandise& m)
@@ -130,11 +173,11 @@ void Acteur::pickUpAll(vector<Marchandise>& m)
     }
 }
 
-void Acteur::dropOff(Marchandise& m)
+void Acteur::dropOff(Marchandise& _m)
 {
     for (unsigned int i = 0; i < this->inventaire.size(); i++)
     {
-        if (this->inventaire[i] == m)
+        if (this->inventaire[i] == _m)
         {
             this->inventaire.erase(this->inventaire.begin() + i);
             break;
@@ -155,11 +198,11 @@ void Acteur::rechargerEndurance()
     }
 }
 
-void Acteur::rechargerEndurance(double e)
+void Acteur::rechargerEndurance(double _e)
 {
     if (endurance < ENDURANCE_MAX)
     {
-        endurance += e;
+        endurance += _e;
     }
 }
 
@@ -171,10 +214,10 @@ void Acteur::diminuerEndurance()
     }
 }
 
-void Acteur::diminuerEndurance(double e)
+void Acteur::diminuerEndurance(double _e)
 {
     if (endurance > 0)
     {
-        endurance -= e;
+        endurance -= _e;
     }
 }

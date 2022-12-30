@@ -34,7 +34,7 @@ class Marchandise : public Entitee
          * 
          * @param _A la matrice dans laquelle la marchandise se trouve
          */
-        Marchandise(Matrix& _A);
+        Marchandise(Matrix* _A);
 
         /**
          * @brief Constructeur avec une matrice et une position
@@ -43,7 +43,7 @@ class Marchandise : public Entitee
          * @param _x la position en x de la marchandise
          * @param _y la position en y de la marchandise
          */
-        Marchandise(Matrix& _A, int _x, int _y);
+        Marchandise(Matrix* _A, int _x, int _y);
 
         /**
          * @brief Constructeur avec une matrice, une position et un type
@@ -55,7 +55,7 @@ class Marchandise : public Entitee
          * @param _nomMarchandise le nom de la marchandise
          * @param _type le type de la marchandise
          */
-        Marchandise(Matrix& _A, int _x, int _y, int _valeur, string _nom, int _type);
+        Marchandise(Matrix* _A, int _x, int _y, int _valeur, string _nom, int _type);
 
         /**
          * @brief Constructeur de copie

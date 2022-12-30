@@ -45,7 +45,7 @@ endif
 $(OBJS)matrix$(DLLEXT): $(SRCS)matrix.cpp $(HEADERS)matrix.h
 	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)matrix.cpp -o $(OBJS)matrix$(DLLEXT)
 
-$(OBJS)entitee$(DLLEXT): $(SRCS)entitee.cpp $(HEADERS)entitee.h
+$(OBJS)entitee$(DLLEXT): $(SRCS)entitee.cpp $(HEADERS)entitee.h $(HEADERS)entitees/acteur.h
 	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)entitee.cpp -o $(OBJS)entitee$(DLLEXT)
 
 $(OBJS)entitees/marchandise$(DLLEXT): $(SRCS)entitees/marchandise.cpp $(HEADERS)entitees/marchandise.h

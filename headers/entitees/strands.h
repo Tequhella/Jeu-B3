@@ -35,20 +35,25 @@ class Strands : public Entitee
         /**
          * @brief Constructeur de la classe Strands
          * 
+         * @param _A la matrice de l'entitee
          */
-        Strands(Matrix& A);
+        Strands(Matrix* _A);
 
         /**
          * @brief Constructeur de la classe Strands
          * 
+         * @param _A la matrice de l'entitee
+         * @param _x la position x de l'entitee
+         * @param _y la position y de l'entitee
          */
-        Strands(Matrix& A, int x, int y);
+        Strands(Matrix* _A, int _x, int _y);
 
         /**
-         * @brief Constructeur de la classe Strands
+         * @brief Constructeur par copie de la classe Strands
          * 
+         * @param _s le Strands à copier
          */
-        Strands(const Strands& s);
+        Strands(const Strands& _s);
 
     
     /***************/
@@ -67,10 +72,18 @@ class Strands : public Entitee
         /**
          * @brief Opérateur d'affectation de la classe Strands
          * 
-         * @param s le Strands à copier
+         * @param _s le Strands à copier
          * @return Strands& le Strands copié
          */
-        Strands& operator=(const Strands& s);
+        Strands& operator=(const Strands& _s);
+
+        /**
+         * @brief Opérateur de flux de sortie de la classe Strands
+         * 
+         * @param _os le flux de sortie
+         * @param _s le Strands à afficher
+         */
+        friend ostream& operator<<(ostream& _os, const Strands& _s);
 
     /************/
     /* METHODES */

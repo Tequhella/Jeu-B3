@@ -12,14 +12,17 @@
 #ifndef __ENTITEE_H__
 #define __ENTITEE_H__
 
+#define LARGEUR_MAX 20
+
 #include <iostream>
 #include "matrix.h"
 
 enum TypeEntitee
 {
-    ACTEUR,
+    VIDE,
     MARCHANDISE,
-    STRANDS
+    STRANDS,
+    ACTEUR
 };
 
 using namespace std;
@@ -148,6 +151,12 @@ class Entitee
          * @param _m la matrice de l'entitee
          */
         void setMatrice(Matrix& _m) { this->A = &_m; }
+    
+    /************/
+    /* METHODES */
+    /************/
+
+        void placement();
 
     protected:
         int x;

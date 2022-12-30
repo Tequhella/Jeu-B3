@@ -20,9 +20,20 @@ int main(int argc, char const *argv[])
 {
     Matrix A(LARGEUR_MAX, LARGEUR_MAX);
     
-    Entitee e(&A, 1, 0, MARCHANDISE);
+    Marchandise m(&A, 1, 1);
+    Strands s(&A, 2, 2);
+    Protagoniste p(&A, 3, 3);
+    Mules mules(&A, 4, 4);
 
-    cout << e << endl;
+    m.placement();
+    s.placement();
+    p.placement();
+    mules.placement();
+
+    cout << m << endl;
+    cout << p << endl;
+    cout << s << endl;
+    cout << mules << endl;
 
     cout << A << endl;
     

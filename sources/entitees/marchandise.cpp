@@ -17,17 +17,25 @@
 
 Marchandise::Marchandise() : Entitee(), valeur(0), nomMarchandise("default")
 {
-    type = 0;
+    srand(time(NULL));
+
+    x    = rand() % LARGEUR_MAX;
+    y    = rand() % LARGEUR_MAX;
+    type = MARCHANDISE;
 }
 
-Marchandise::Marchandise(Matrix& _A) : Entitee(&_A), valeur(0), nomMarchandise("default")
+Marchandise::Marchandise(Matrix* _A) : Entitee(_A), valeur(0), nomMarchandise("default")
 {
-    type = 0;
+    srand(time(NULL));
+
+    x    = rand() % LARGEUR_MAX;
+    y    = rand() % LARGEUR_MAX;
+    type = MARCHANDISE;
 }
 
-Marchandise::Marchandise(Matrix& _A, int _x, int _y) : Entitee(&_A, _x, _y, 0), valeur(0), nomMarchandise("default"){}
+Marchandise::Marchandise(Matrix* _A, int _x, int _y) : Entitee(_A, _x, _y, MARCHANDISE), valeur(0), nomMarchandise("default"){}
 
-Marchandise::Marchandise(Matrix& _A, int _x, int _y, int _valeur, string _nomMarchandise, int _type) : Entitee(&_A, _x, _y, _type), valeur(_valeur), nomMarchandise(_nomMarchandise){}
+Marchandise::Marchandise(Matrix* _A, int _x, int _y, int _valeur, string _nomMarchandise, int _type) : Entitee(_A, _x, _y, _type), valeur(_valeur), nomMarchandise(_nomMarchandise){}
 
 Marchandise::Marchandise(const Marchandise& _m) : Entitee((Matrix*)_m.A, (int)_m.x, (int)_m.y, (int)_m.type), valeur(_m.valeur), nomMarchandise(_m.nomMarchandise){}
 

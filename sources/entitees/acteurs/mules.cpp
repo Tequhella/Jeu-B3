@@ -15,13 +15,19 @@
 /* CONSTRUCTEURS */
 /*****************/
 
-Mules::Mules() : Acteur(){}
+Mules::Mules() : Acteur()
+{
+    type = MULE;
+}
 
-Mules::Mules(Matrix& A) : Acteur(A){}
+Mules::Mules(Matrix* _A) : Acteur(_A)
+{
+    type = MULE;
+}
 
-Mules::Mules(Matrix& A, int x, int y) : Acteur(A, x, y){}
+Mules::Mules(Matrix* _A, int _x, int _y) : Acteur(_A, _x, _y, MULE){}
 
-Mules::Mules(const Mules& m) : Acteur((Matrix&)m.A, (int)m.x, (int)m.y){}
+Mules::Mules(const Mules& _m) : Acteur((Matrix*)_m.A, (int)_m.x, (int)_m.y, (int)_m.type){}
 
 /***************/
 /* DESTRUCTEUR */
@@ -33,29 +39,29 @@ Mules::~Mules(){}
 /* OPERATEURS */
 /**************/
 
-Mules& Mules::operator=(const Mules& m)
+Mules& Mules::operator=(const Mules& _m)
 {
-    this->A = m.A;
-    this->x = m.x;
-    this->y = m.y;
+    this->A = _m.A;
+    this->x = _m.x;
+    this->y = _m.y;
     return *this;
 }
 
-ostream& operator<<(ostream& os, const Mules& m)
+ostream& operator<<(ostream& _os, const Mules& _m)
 {
-    os << "Mules : " << endl;
-    os << "Position : (" << m.x << ", " << m.y << ")" << endl;
-    return os;
+    _os << "Mules : " << endl;
+    _os << "Position : (" << _m.x << ", " << _m.y << ")" << endl;
+    return _os;
 }
 
 /************/
 /* METHODES */
 /************/
 
-void Mules::poursuite(Protagoniste& p)
+void Mules::poursuite(Protagoniste& _p)
 {
-    if (p.getX() > x) /*-------->*/ x++;
-    else if (p.getX() < x) /*--->*/ x--;
-    else if (p.getY() > y) /*--->*/ y++;
-    else if (p.getY() < y) /*--->*/ y--;
+    if (_p.getX() > x) /*-------->*/ x++;
+    else if (_p.getX() < x) /*--->*/ x--;
+    else if (_p.getY() > y) /*--->*/ y++;
+    else if (_p.getY() < y) /*--->*/ y--;
 }

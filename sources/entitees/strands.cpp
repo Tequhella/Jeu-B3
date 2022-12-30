@@ -17,11 +17,11 @@
 
 Strands::Strands() : Entitee(){}
 
-Strands::Strands(Matrix& A) : Entitee(&A){}
+Strands::Strands(Matrix* _A) : Entitee(_A){}
 
-Strands::Strands(Matrix& A, int x, int y) : Entitee(&A, x, y){}
+Strands::Strands(Matrix* _A, int _x, int _y) : Entitee(_A, _x, _y, STRANDS){}
 
-Strands::Strands(const Strands& s) : Entitee((Matrix*)s.A, (int)s.x, (int)s.y){}
+Strands::Strands(const Strands& _s) : Entitee((Matrix*)_s.A, (int)_s.x, (int)_s.y, (int)_s.type){}
 
 /***************/
 /* DESTRUCTEUR */
@@ -33,22 +33,31 @@ Strands::~Strands(){}
 /* OPERATEURS */
 /**************/
 
-ostream& operator<<(ostream& os, const Strands& s)
+Strands& Strands::operator=(const Strands& _s)
 {
-    os << "Strands : " << endl;
-    os << "Position : (" << s.getX() << ", " << s.getY() << ")" << endl;
-    return os;
+    x    = _s.x;
+    y    = _s.y;
+    type = _s.type;
+    A    = _s.A;
+    return *this;
+}
+
+ostream& operator<<(ostream& _os, const Strands& _s)
+{
+    _os << "Strands : " << endl;
+    _os << "Position : (" << _s.getX() << ", " << _s.getY() << ")" << endl;
+    return _os;
 }
 
 /************/
 /* METHODES */
 /************/
 
-bool Strands::poursuite(Protagoniste& p)
+bool Strands::poursuite(Protagoniste& _p)
 {
-    if (p.getX() > x) /*-------->*/ x++;
-    else if (p.getX() < x) /*--->*/ x--;
-    else if (p.getY() > y) /*--->*/ y++;
-    else if (p.getY() < y) /*--->*/ y--;
-    return (p.getX() == x && p.getY() == y);
+    if (_p.getX() > x) /*-------->*/ x++;
+    else if (_p.getX() < x) /*--->*/ x--;
+    else if (_p.getY() > y) /*--->*/ y++;
+    else if (_p.getY() < y) /*--->*/ y--;
+    return (_p.getX() == x && _p.getY() == y);
 }

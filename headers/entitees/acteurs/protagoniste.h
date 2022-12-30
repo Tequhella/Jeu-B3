@@ -32,25 +32,25 @@ class Protagoniste : public Acteur
         /**
          * @brief Constructeur avec une matrice
          * 
-         * @param A la matrice dans laquelle le protagoniste se trouve
+         * @param _A la matrice dans laquelle le protagoniste se trouve
          */
-        Protagoniste(Matrix& A);
+        Protagoniste(Matrix* _A);
 
         /**
          * @brief Constructeur avec une matrice et une position
          * 
-         * @param A la matrice dans laquelle le protagoniste se trouve
-         * @param x la position en x du protagoniste
-         * @param y la position en y du protagoniste
+         * @param _A la matrice dans laquelle le protagoniste se trouve
+         * @param _x la position en x du protagoniste
+         * @param _y la position en y du protagoniste
          */
-        Protagoniste(Matrix& A, int x, int y);
+        Protagoniste(Matrix* _A, int _x, int _y);
 
         /**
          * @brief Constructeur de copie
          * 
-         * @param p le protagoniste à copier
+         * @param _p le protagoniste à copier
          */
-        Protagoniste(const Protagoniste& p);
+        Protagoniste(const Protagoniste& _p);
 
     /***************/
     /* DESTRUCTEUR */
@@ -66,110 +66,35 @@ class Protagoniste : public Acteur
     /**************/
 
         /**
-         * @brief Affiche l'inventaire du protagoniste
+         * @brief opérateur de flux de sortie
+         * 
+         * @param _os le flux de sortie
+         * @param _p le protagoniste
          */
-        friend ostream& operator<<(ostream& os, const Protagoniste& p);
+        friend ostream& operator<<(ostream& _os, const Protagoniste& _p);
 
     
     /**************/
     /* ACCESSEURS */
     /**************/
 
-        /**
-         * @brief Renvoie le nombre de marchandises que le protagoniste transporte
-         * 
-         * @return int le nombre de marchandises que le protagoniste transporte
-         */
-        int getNbMarchandise() const { return nbMarchandise; }
-
-        /**
-         * @brief Renvoie la marchandise à la position i
-         * 
-         * @param i la position de la marchandise
-         * 
-         * @return Marchandise& la marchandise à la position i
-         */
-        Marchandise getMarchandise(int i) const { return *inventaire[i];}
-
-        /**
-         * @brief Renvoie l'endurance du protagoniste
-         * 
-         * @return double l'endurance du protagoniste
-         */
-        double getEndurance() const { return endurance; }
+        
 
     /*************/
     /* MUTATEURS */
     /*************/
 
-        /**
-         * @brief Modifie la marchandise à la position i
-         * 
-         * @param i la position de la marchandise
-         * @param m la nouvelle marchandise
-         */
-        void setMarchandise(int i, Marchandise& m) { inventaire[i] = &m; }
-
-        /**
-         * @brief Modifie l'endurance du protagoniste
-         * 
-         * @param e la nouvelle endurance
-         */
-        void setEndurance(double e) { endurance = e; }
+        
     
     /************/
     /* METHODES */
     /************/
         
-        /**
-         * @brief Prend une marchandise
-         * 
-         * @param m la marchandise à prendre
-         */
-        void pickUp(Marchandise& m);
-
-        /**
-         * @brief Prend toutes les marchandises
-         */
-        void pickUpAll(vector<Marchandise>& m);
-
-        /**
-         * @brief Dépose une marchandise
-         * 
-         * @param m la marchandise à déposer
-         */
-        void dropOff(Marchandise& m);
-
-        /**
-         * @brief Dépose toutes les marchandises
-         */
-        void dropOffAll();
-
-        /**
-         * @brief Recharge l'endurance du protagoniste
-         */
-        void rechargerEndurance();
-
-        /**
-         * @brief Recharge l'endurance du protagoniste d'une certaine valeur
-         */
-        void rechargerEndurance(double e);
-
-        /**
-         * @brief Diminue l'endurance du protagoniste
-         */
-        void diminuerEndurance();
-
-        /**
-         * @brief Diminue l'endurance du protagoniste d'une certaine valeur
-         */
-        void diminuerEndurance(double e);
+        
 
 
     private:
-        double endurance;
-        int    nbMarchandise;
-        vector<Marchandise*> inventaire;
+        
 };
 
 #endif // __PROTAGONISTE_H__
