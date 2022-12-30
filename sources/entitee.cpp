@@ -50,15 +50,6 @@ Entitee::Entitee(Matrix* _A, int _x, int _y, int _type) : x(_x), y(_y), type(_ty
         exit(1);
     }
 
-    // Vérifie le type de l'entité pour l'ajouter dans la matrice
-    if (type == ACTEUR)
-    {
-        // On caste l'objet pour récupérer le type de l'acteur
-        Acteur* acteur = static_cast<Acteur*>(this);
-        cout << "Type de l'acteur : " << acteur->getType() << endl;
-        A->in(_x, _y, ACTEUR + acteur->getType());
-    }
-    else /*--->*/ A->in(_x, _y, type);
 }
 
 Entitee::Entitee(const Entitee& _e) : x(_e.x), y(_e.y), A(_e.A){}
@@ -107,7 +98,6 @@ void Entitee::placement()
     {
         // On caste l'objet pour récupérer le type de l'acteur
         Acteur* acteur = static_cast<Acteur*>(this);
-        cout << "Type de l'acteur : " << acteur->getType() << endl;
         A->in(x, y, ACTEUR + acteur->getType());
     }
     else /*--->*/ A->in(x, y, type);

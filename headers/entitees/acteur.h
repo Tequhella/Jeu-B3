@@ -120,9 +120,10 @@ class Acteur : public Entitee
         /**
          * @brief Attaque l'acteur passé en paramètre
          * 
-         * @param _a
+         * @param _a l'acteur à attaquer
+         * @param _m le vecteur de marchandises dans la matrice
          */
-        void attaquer(Acteur& _a);
+        void attaquer(Acteur& _a, vector<Marchandise>& _m);
 
         /**
          * @brief Déplace l'acteur dans la matrice avec les coordonnées x et y

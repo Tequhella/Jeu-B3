@@ -116,9 +116,31 @@ ostream& operator<<(ostream& _os, const Acteur& _a)
 /* METHODES */
 /************/
 
-void Acteur::attaquer(Acteur& _a)
+void Acteur::attaquer(Acteur& _a, vector<Marchandise>& _m)
 {
     _a.vie -= this->force;
+
+    if (_a.vie <= 0)
+    {
+        _a.vie = 0;
+        _a.A->out(_a.x, _a.y, ACTEUR + _a.type);
+    }
+
+    // Déséquipe l'acteur d'une marchandise aléatoire sur une case aléatoire autour de lui
+    srand(time(NULL));
+    _m.push_back(_a.inventaire[rand() % _a.inventaire.size()]);
+    _a.dropOff(_m[_m.size() - 1]);
+    int x, y;
+    while (true)
+    {
+        x = rand() % 3 - 1;
+        y = rand() % 3 - 1;
+        if (x != 0 || y != 0)
+            break;
+    }
+    _m[_m.size() - 1].setX(_a.x + x);
+    _m[_m.size() - 1].setY(_a.y + y);
+    _m[_m.size() - 1].getMatrice().in(_m[_m.size() - 1].getX(), _m[_m.size() - 1].getY(), MARCHANDISE);
 }
 
 void Acteur::deplacement(int _x, int _y)
