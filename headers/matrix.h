@@ -92,9 +92,16 @@ public:
      *
      * @param x la ligne
      * @param y la colonne
+     * @param type le type de l'éléments
      * @return int& l'élément à la ligne x et à la colonne y
      */
-    inline int &operator()(int x, int y) { return p[x][y]; }
+    inline int &operator()(int x, int y, int type) const
+    {
+        if (type == 0)
+            return p[x][y];
+        else
+            return e[x][y];
+    }
 
     /**
      * @brief Surcharge de l'opérateur d'incrémentation

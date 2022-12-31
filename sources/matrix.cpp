@@ -136,6 +136,7 @@ bool Matrix::operator==(const Matrix& m) const
     return true;
 }
 
+
 Matrix& Matrix::operator+=(const Matrix& m)
 {
     for (int i = 0; i < rows_; ++i)
@@ -344,7 +345,7 @@ int Matrix::dotProduct(Matrix a, Matrix b)
     int sum = 0;
     for (int i = 0; i < a.rows_; ++i)
     {
-        sum += (a(i, 0) * b(i, 0));
+        sum += (a(i, 0, 0) * b(i, 0, 0));
     }
     return sum;
 }
@@ -358,9 +359,9 @@ Matrix Matrix::augment(Matrix A, Matrix B)
         for (int j = 0; j < AB.cols_; ++j)
         {
             if (j < A.cols_)
-                AB(i, j) = A(i, j);
+                AB(i, j, 0) = A(i, j, 0);
             else
-                AB(i, j) = B(i, j - B.cols_);
+                AB(i, j, 0) = B(i, j - B.cols_, 0);
         }
     }
     return AB;
@@ -383,7 +384,7 @@ Matrix Matrix::gaussianEliminate()
         bool pivot_found = false;
         while (j < Acols && !pivot_found)
         {
-            if (Ab(i, j) != 0)
+            if (Ab(i, j, 0) != 0)
             { // pivot not equal to 0
                 pivot_found = true;
             } else { // check for a possible swap
@@ -391,7 +392,7 @@ Matrix Matrix::gaussianEliminate()
                 int max_val = 0;
                 for (int k = i + 1; k < rows; ++k)
                 {
-                    int cur_abs = Ab(k, j) >= 0 ? Ab(k, j) : -1 * Ab(k, j);
+                    int cur_abs = Ab(k, j, 0) >= 0 ? Ab(k, j, 0) : -1 * Ab(k, j, 0);
                     if (cur_abs > max_val)
                     {
                         max_row = k;
@@ -415,11 +416,11 @@ Matrix Matrix::gaussianEliminate()
             {
                 for (int s = j + 1; s < cols; ++s)
                 {
-                    Ab(t, s) = Ab(t, s) - Ab(i, s) * (Ab(t, j) / Ab(i, j));
-                    if (Ab(t, s) < EPS && Ab(t, s) > -1*EPS)
-                        Ab(t, s) = 0;
+                    Ab(t, s, 0) = Ab(t, s, 0) - Ab(i, s, 0) * (Ab(t, j, 0) / Ab(i, j, 0));
+                    if (Ab(t, s, 0) < EPS && Ab(t, s, 0) > -1*EPS)
+                        Ab(t, s, 0) = 0;
                 }
-                Ab(t, j) = 0;
+                Ab(t, j, 0) = 0;
             }
         }
 
@@ -446,13 +447,13 @@ Matrix Matrix::rowReduceFromGaussian()
         int k = j - 1;
         while (k >= 0)
         {
-            if (R(i, k) != 0)
+            if (R(i, k, 0) != 0)
                 j = k;
             k--;
         }
 
         // zero out elements above pivots if pivot not 0
-        if (R(i, j) != 0)
+        if (R(i, j, 0) != 0)
         {
        
             for (int t = i - 1; t >= 0; --t)
@@ -461,22 +462,22 @@ Matrix Matrix::rowReduceFromGaussian()
                 {
                     if (s != j)
                     {
-                        R(t, s) = R(t, s) - R(i, s) * (R(t, j) / R(i, j));
-                        if (R(t, s) < EPS && R(t, s) > -1*EPS)
-                            R(t, s) = 0;
+                        R(t, s, 0) = R(t, s, 0) - R(i, s, 0) * (R(t, j, 0) / R(i, j, 0));
+                        if (R(t, s, 0) < EPS && R(t, s, 0) > -1*EPS)
+                            R(t, s, 0) = 0;
                     }
                 }
-                R(t, j) = 0;
+                R(t, j, 0) = 0;
             }
 
             // divide row by pivot
             for (int k = j + 1; k < cols; ++k)
             {
-                R(i, k) = R(i, k) / R(i, j);
-                if (R(i, k) < EPS && R(i, k) > -1*EPS)
-                    R(i, k) = 0;
+                R(i, k, 0) = R(i, k, 0) / R(i, j, 0);
+                if (R(i, k, 0) < EPS && R(i, k, 0) > -1*EPS)
+                    R(i, k, 0) = 0;
             }
-            R(i, j) = 1;
+            R(i, j, 0) = 1;
 
         }
 
@@ -500,15 +501,15 @@ void Matrix::readSolutionsFromRREF(ostream& os)
         bool allZeros = true;
         for (int j = 0; j < cols_ - 1; ++j)
         {
-            if (R(i, j) != 0)
+            if (R(i, j, 0) != 0)
                 allZeros = false;
         }
-        if (allZeros && R(i, cols_ - 1) != 0)
+        if (allZeros && R(i, cols_ - 1, 0) != 0)
         {
             hasSolutions = false;
             os << "NO SOLUTIONS" << endl << endl;
             doneSearching = true;
-        } else if (allZeros && R(i, cols_ - 1) == 0)
+        } else if (allZeros && R(i, cols_ - 1, 0) == 0)
         {
             os << "INFINITE SOLUTIONS" << endl << endl;
             doneSearching = true;
@@ -534,20 +535,20 @@ void Matrix::readSolutionsFromRREF(ostream& os)
             bool specialCreated = false;
             for (int j = 0; j < cols_ - 1; ++j)
             {
-                if (R(i, j) != 0)
+                if (R(i, j, 0) != 0)
                 {
                     // if pivot variable, add b to particular
                     if (!pivotFound)
                     {
                         pivotFound = true;
-                        particular(j, 0) = R(i, cols_ - 1);
+                        particular(j, 0, 0) = R(i, cols_ - 1, 0);
                     } else { // otherwise, add to special solution
                         if (!specialCreated)
                         {
                             special = Matrix(cols_ - 1, 1);
                             specialCreated = true;
                         }
-                        special(j, 0) = -1 * R(i, j);
+                        special(j, 0, 0) = -1 * R(i, j, 0);
                     }
                 }
             }
@@ -568,7 +569,7 @@ Matrix Matrix::inverse()
     {
         for (int j = 0; j < AInverse.cols_; ++j)
         {
-            AInverse(i, j) = IAInverse(i, j + cols_);
+            AInverse(i, j, 0) = IAInverse(i, j + cols_, 0);
         }
     }
     return AInverse;

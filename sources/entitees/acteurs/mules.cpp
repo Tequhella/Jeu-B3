@@ -60,8 +60,12 @@ ostream& operator<<(ostream& _os, const Mules& _m)
 
 void Mules::poursuite(Protagoniste& _p)
 {
-    if (_p.getX() > x) /*-------->*/ x++;
-    else if (_p.getX() < x) /*--->*/ x--;
-    else if (_p.getY() > y) /*--->*/ y++;
-    else if (_p.getY() < y) /*--->*/ y--;
+    // si le protagoniste est à un certain rayon de la mule, la mule le poursuit
+    if (sqrt(pow(_p.getX() - x, 2) + pow(_p.getY() - y, 2)) < 5)
+    {
+        if (_p.getX() > x) /*-------->*/ deplacement(1, 0);
+        else if (_p.getX() < x) /*--->*/ deplacement(-1, 0);
+        else if (_p.getY() > y) /*--->*/ deplacement(0, 1);
+        else if (_p.getY() < y) /*--->*/ deplacement(0, -1);
+    }
 }

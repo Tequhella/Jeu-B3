@@ -33,7 +33,6 @@ Entitee::Entitee(Matrix* _A, int _x, int _y) : x(_x), y(_y), A(_A)
         cout << "Erreur : les coordonnées sont trop grandes" << endl;
         exit(1);
     }
-    A->in(_x, _y, 0);
 }
 
 Entitee::Entitee(Matrix* _A, int _x, int _y, int _type) : x(_x), y(_y), type(_type), A(_A)
@@ -49,7 +48,6 @@ Entitee::Entitee(Matrix* _A, int _x, int _y, int _type) : x(_x), y(_y), type(_ty
         cout << "Erreur : le type n'est pas valide" << endl;
         exit(1);
     }
-
 }
 
 Entitee::Entitee(const Entitee& _e) : x(_e.x), y(_e.y), A(_e.A){}
@@ -93,12 +91,24 @@ ostream& operator<<(ostream& _os, const Entitee& _e)
 
 void Entitee::placement()
 {
+    Matrix A = *(this->A); // On récupère la matrice
+
+    // On génère des coordonnées aléatoires si la position est déjà occupée par un acteur ou un strands
+    while (!(A(x, y, 1) == MARCHANDISE) && !(A(x, y, 1) == VIDE))
+    {
+        x = rand() % LARGEUR_MAX;
+        y = rand() % LARGEUR_MAX;
+    }
+
     // Vérifie le type de l'entité pour l'ajouter dans la matrice
     if (type == ACTEUR)
     {
         // On caste l'objet pour récupérer le type de l'acteur
         Acteur* acteur = static_cast<Acteur*>(this);
-        A->in(x, y, ACTEUR + acteur->getType());
+        this->A->in(x, y, ACTEUR + acteur->getType());
     }
-    else /*--->*/ A->in(x, y, type);
+    else
+    {
+        this->A->in(x, y, type);
+    }
 }

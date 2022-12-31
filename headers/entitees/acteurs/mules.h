@@ -16,6 +16,7 @@
 #include "protagoniste.h"
 
 #include <vector>
+#include <math.h>
 
 using namespace std;
 

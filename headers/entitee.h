@@ -107,21 +107,28 @@ class Entitee
     /**************/
 
         /**
-         * @brief Accesseur de la classe Entitee
+         * @brief Retourne la position en x de l'entitee
          * 
          * @return int la position en x de l'entitee
          */
         int getX() const { return x; }
 
         /**
-         * @brief Accesseur de la classe Entitee
+         * @brief Retourne la position en y de l'entitee
          * 
          * @return int la position en y de l'entitee
          */
         int getY() const { return y; }
 
         /**
-         * @brief Accesseur de la classe Entitee
+         * @brief Retourne le type de l'entitee
+         * 
+         * @return TypeEntitee le type de l'entitee
+         */
+        int getType() const { return type; }
+
+        /**
+         * @brief Retourne la matrice de l'entitee
          * 
          * @return Matrix la matrice de l'entitee
          */
@@ -132,21 +139,28 @@ class Entitee
     /*************/
 
         /**
-         * @brief Mutateur de la classe Entitee
+         * @brief Modifie la position en x de l'entitee
          * 
          * @param _x la position en x de l'entitee
          */
         void setX(int _x) { this->x = _x; }
 
         /**
-         * @brief Mutateur de la classe Entitee
+         * @brief Modifie la position en y de l'entitee
          * 
          * @param _y la position en y de l'entitee
          */
         void setY(int _y) { this->y = _y; }
 
         /**
-         * @brief Mutateur de la classe Entitee
+         * @brief Modifie le type de l'entitee
+         * 
+         * @param _type le type de l'entitee
+         */
+        void setType(int _type) { this->type = _type; }
+
+        /**
+         * @brief Modifie la matrice de l'entitee
          * 
          * @param _m la matrice de l'entitee
          */
