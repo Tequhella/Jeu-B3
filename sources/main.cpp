@@ -14,6 +14,7 @@
 #include "../headers/entitees/acteurs/mules.h"
 #include "../headers/entitees/marchandise.h"
 #include "../headers/entitees/strands.h"
+#include "../headers/input.h"
 using namespace std;
 
 int main(int argc, char const *argv[])

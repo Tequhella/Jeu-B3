@@ -18,10 +18,10 @@ else
 	INCL =
 endif
 
-all: $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)entitee$(DLLEXT) $(OBJS)entitees/marchandise$(DLLEXT) $(OBJS)entitees/strands$(DLLEXT) $(OBJS)entitees/acteur$(DLLEXT) $(OBJS)entitees/acteurs/protagoniste$(DLLEXT) $(OBJS)entitees/acteurs/mules$(DLLEXT) $(OBJS)interface$(DLLEXT)
-	$(CC) $(CFLAGS) -o app $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)entitee$(DLLEXT) $(OBJS)entitees/marchandise$(DLLEXT) $(OBJS)entitees/strands$(DLLEXT) $(OBJS)entitees/acteur$(DLLEXT) $(OBJS)entitees/acteurs/protagoniste$(DLLEXT) $(OBJS)entitees/acteurs/mules$(DLLEXT) $(OBJS)interface$(DLLEXT) $(LIB)
+all: $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)entitee$(DLLEXT) $(OBJS)entitees/marchandise$(DLLEXT) $(OBJS)entitees/strands$(DLLEXT) $(OBJS)entitees/acteur$(DLLEXT) $(OBJS)entitees/acteurs/protagoniste$(DLLEXT) $(OBJS)entitees/acteurs/mules$(DLLEXT) $(OBJS)interface$(DLLEXT) $(OBJS)input$(DLLEXT)
+	$(CC) $(CFLAGS) -o app $(OBJS)main$(DLLEXT) $(OBJS)matrix$(DLLEXT) $(OBJS)entitee$(DLLEXT) $(OBJS)entitees/marchandise$(DLLEXT) $(OBJS)entitees/strands$(DLLEXT) $(OBJS)entitees/acteur$(DLLEXT) $(OBJS)entitees/acteurs/protagoniste$(DLLEXT) $(OBJS)entitees/acteurs/mules$(DLLEXT) $(OBJS)interface$(DLLEXT) $(OBJS)input$(DLLEXT) $(LIB)
 
-$(OBJS)main$(DLLEXT): $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)entitee.h $(HEADERS)entitees/marchandise.h $(HEADERS)entitees/strands.h $(HEADERS)entitees/acteur.h $(HEADERS)entitees/acteurs/protagoniste.h $(HEADERS)entitees/acteurs/mules.h $(HEADERS)interface.h
+$(OBJS)main$(DLLEXT): $(SRCS)main.cpp $(HEADERS)matrix.h $(HEADERS)entitee.h $(HEADERS)entitees/marchandise.h $(HEADERS)entitees/strands.h $(HEADERS)entitees/acteur.h $(HEADERS)entitees/acteurs/protagoniste.h $(HEADERS)entitees/acteurs/mules.h $(HEADERS)interface.h $(HEADERS)input.h
 ifneq ($(wildcard obj/.*),)
 	@echo "Found obj."
 else
@@ -64,7 +64,10 @@ $(OBJS)entitees/acteurs/mules$(DLLEXT): $(SRCS)entitees/acteurs/mules.cpp $(HEAD
 	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)entitees/acteurs/mules.cpp -o $(OBJS)entitees/acteurs/mules$(DLLEXT)
 
 $(OBJS)interface$(DLLEXT): $(SRCS)interface.cpp $(HEADERS)interface.h
-	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)interface.cpp -o $(OBJS)interface$(DLLEXT) 
+	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)interface.cpp -o $(OBJS)interface$(DLLEXT)
+
+$(OBJS)input$(DLLEXT): $(SRCS)input.cpp $(HEADERS)input.h
+	$(CC) $(CFLAGS) -c $(INCL) $(SRCS)input.cpp -o $(OBJS)input$(DLLEXT)
 
 packages:
 	sudo apt install libsfml-dev -y
