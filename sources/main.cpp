@@ -10,7 +10,6 @@
  */
 #include <iostream>
 #include "../headers/matrix.h"
-#include "../headers/acteur.h"
 #include "../headers/interface.h"
 
 using namespace std;
