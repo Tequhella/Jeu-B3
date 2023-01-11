@@ -15,17 +15,19 @@ using std::domain_error;
 
 Matrix::Matrix(int rows, int cols) : rows_(rows), cols_(cols)
 {
+    srand(time(nullptr));
     allocSpace();
     for (int i = 0; i < rows_; ++i)
     {
         for (int j = 0; j < cols_; ++j)
         {
-            p[i][j] = 0;
+            p[i][j] = rand() % 2;
+            temp[i][j] = p[i][j];
         }
     }
 }
 
-Matrix::Matrix(double** a, int rows, int cols) : rows_(rows), cols_(cols)
+Matrix::Matrix(int** a, int rows, int cols) : rows_(rows), cols_(cols)
 {
     allocSpace();
     for (int i = 0; i < rows_; ++i)
@@ -33,6 +35,7 @@ Matrix::Matrix(double** a, int rows, int cols) : rows_(rows), cols_(cols)
         for (int j = 0; j < cols_; ++j)
         {
             p[i][j] = a[i][j];
+            temp[i][j] = p[i][j];
         }
     }
 }
@@ -41,6 +44,7 @@ Matrix::Matrix() : rows_(1), cols_(1)
 {
     allocSpace();
     p[0][0] = 0;
+    temp[0][0] = 0;
 }
 
 Matrix::~Matrix()
@@ -48,8 +52,10 @@ Matrix::~Matrix()
     for (int i = 0; i < rows_; ++i)
     {
         delete[] p[i];
+        delete[] temp[i];
     }
     delete[] p;
+    delete[] temp;
 }
 
 Matrix::Matrix(const Matrix& m) : rows_(m.rows_), cols_(m.cols_)
@@ -59,7 +65,8 @@ Matrix::Matrix(const Matrix& m) : rows_(m.rows_), cols_(m.cols_)
     {
         for (int j = 0; j < cols_; ++j)
         {
-            p[i][j] = m.p[i][j];
+            p[i][j]    = m.p[i][j];
+            temp[i][j] = m.temp[i][j];
         }
     }
 }
@@ -76,8 +83,10 @@ Matrix& Matrix::operator=(const Matrix& m)
         for (int i = 0; i < rows_; ++i)
         {
             delete[] p[i];
+            delete[] temp[i];
         }
         delete[] p;
+        delete[] temp;
 
         rows_ = m.rows_;
         cols_ = m.cols_;
@@ -88,7 +97,8 @@ Matrix& Matrix::operator=(const Matrix& m)
     {
         for (int j = 0; j < cols_; ++j)
         {
-            p[i][j] = m.p[i][j];
+            p[i][j]    = m.p[i][j];
+            temp[i][j] = m.temp[i][j];
         }
     }
     return *this;
@@ -164,9 +174,114 @@ Matrix Matrix::operator^(int num)
     return expHelper(temp, num);
 }
 
+bool Matrix::operator==(const Matrix& m)
+{
+    if (rows_ != m.rows_ || cols_ != m.cols_)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < rows_; ++i)
+    {
+        for (int j = 0; j < cols_; ++j)
+        {
+            if (p[i][j] != m.p[i][j])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Matrix::operator!=(const Matrix& m)
+{
+    return !(*this == m);
+}
+
+bool Matrix::operator<(const Matrix& m)
+{
+    if (rows_ != m.rows_ || cols_ != m.cols_)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < rows_; ++i)
+    {
+        for (int j = 0; j < cols_; ++j)
+        {
+            if (p[i][j] >= m.p[i][j])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Matrix::operator>(const Matrix& m)
+{
+    if (rows_ != m.rows_ || cols_ != m.cols_)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < rows_; ++i)
+    {
+        for (int j = 0; j < cols_; ++j)
+        {
+            if (p[i][j] <= m.p[i][j])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Matrix::operator<=(const Matrix& m)
+{
+    if (rows_ != m.rows_ || cols_ != m.cols_)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < rows_; ++i)
+    {
+        for (int j = 0; j < cols_; ++j)
+        {
+            if (p[i][j] > m.p[i][j])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Matrix::operator>=(const Matrix& m)
+{
+    if (rows_ != m.rows_ || cols_ != m.cols_)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < rows_; ++i)
+    {
+        for (int j = 0; j < cols_; ++j)
+        {
+            if (p[i][j] < m.p[i][j])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 void Matrix::swapRows(int r1, int r2)
 {
-    double *temp = p[r1];
+    int *temp = p[r1];
     p[r1] = p[r2];
     p[r2] = temp;
 }
@@ -527,16 +642,70 @@ Matrix Matrix::inverse()
     return AInverse;
 }
 
+void Matrix::reglesVie(int x, int y)
+{
+    
+    if (x >= 0 && x < cols_ && y >= 0 && y < rows_)
+    {
+        // si la case est vivante et entourée de plus de 3 ou moins de 2 cases vivantes, elle meurt
+        int nbVivantes = -1;
+        for (int i = y - 1; i <= y + 1; i++)
+        {
+            for (int j = x - 1; j <= x + 1; j++)
+            {
+                if ((j >= 0 && j < cols_ && i >= 0 && i < rows_) && p[i][j] == VIVANT)
+                    nbVivantes++;
+            }
+        }
+        if (nbVivantes < 2 || nbVivantes > 3)
+            temp[y][x] = MORT;
+        else
+            temp[y][x] = VIVANT;
+    }
+}
+
+void Matrix::reglesMort(int x, int y)
+{
+    if (x >= 0 && x < cols_ && y >= 0 && y < rows_)
+    {
+        // si la case est morte et entourée de 3 cases vivantes, elle devient vivante
+        int nbVivantes = 0;
+        for (int i = y - 1; i <= y + 1; i++)
+        {
+            for (int j = x - 1; j <= x + 1; j++)
+            {
+                if ((j >= 0 && j < cols_ && i >= 0 && i < rows_) && p[i][j] == VIVANT)
+                    nbVivantes++;
+            }
+        }
+        if (nbVivantes == 3)
+            temp[y][x] = VIVANT;
+    }
+}
+
+void Matrix::rafraichir()
+{
+    for (int i = 0; i < rows_; i++)
+    {
+        for (int j = 0; j < cols_; j++)
+        {
+            p[i][j]    = temp[i][j];
+            temp[i][j] = MORT;
+        }
+    }
+}
 
 /* PRIVATE HELPER FUNCTIONS
  ********************************/
 
 void Matrix::allocSpace()
 {
-    p = new double*[rows_];
+    p    = new int*[rows_];
+    temp = new int*[rows_];
     for (int i = 0; i < rows_; ++i)
     {
-        p[i] = new double[cols_];
+        p[i]    = new int[cols_];
+        temp[i] = new int[cols_];
     }
 }
 

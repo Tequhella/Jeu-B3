@@ -5,6 +5,8 @@
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
 
+#define MORT 0
+#define VIVANT 1
 
 #include <iostream>
 
@@ -31,11 +33,11 @@ class Matrix
         /**
          * @brief Constructeur de la classe Matrix
          * 
-         * @param p pointeur vers un tableau de double
+         * @param p pointeur vers un tableau de int
          * @param rows nombre de lignes de la matrice
          * @param cols nombre de colonnes de la matrice
          */
-        Matrix(double**, int, int);
+        Matrix(int**, int, int);
 
         /**
          * @brief Constructeur par recopie
@@ -70,9 +72,9 @@ class Matrix
          * 
          * @param x abscisse de l'élément
          * @param y ordonnée de l'élément
-         * @return double& référence sur l'élément
+         * @return int& référence sur l'élément
          */
-        inline double& operator()(int x, int y) { return p[x][y]; }
+        inline int& operator()(int x, int y) { return p[y][x]; }
 
         /**
          * @brief Opérateur d'addition d'une matrice à une autre
@@ -286,6 +288,27 @@ class Matrix
          */
         Matrix inverse();
 
+        /**
+         * @brief Règles du jeu de la vie pour les cases vivantes.
+         * 
+         * @param x coordonnée x
+         * @param y coordonnée y
+         */
+        void reglesVie(int, int);
+
+        /**
+         * @brief Règles du jeu de la vie pour les cases mortes.
+         * 
+         * @param x coordonnée x
+         * @param y coordonnée y
+         */
+        void reglesMort(int, int);
+
+        /**
+         * @brief Rafraichit la matrice en appliquant les règles du jeu de la vie.
+         */
+        void rafraichir();
+
     /***********/
     /* GETTERS */
     /***********/
@@ -307,27 +330,13 @@ class Matrix
         /**
          * @brief Retourne la matrice
          * 
-         * @return double** matrice
+         * @return int** matrice
          */
-        inline double** getMatrice() const { return p; }
-
-    private:
-        int rows_, cols_;
-        double **p;
-
-        /**
-         * @brief Alloue de l'espace mémoire pour la matrice
-         */
-        void allocSpace();
-
-        /**
-         * @brief effectue une puissance de la matrice
-         * 
-         * @param m matrice
-         * @param n puissance
-         * @return Matrix matrice résultat
-         */
-        Matrix expHelper(const Matrix&, int);
+        inline int** getMatrice() const { return p; }
+    
+    /***********/
+    /* SETTERS */
+    /***********/
 
         /**
          * @brief effectue une entrée dans la matrice en incrémentant la valeur
@@ -344,6 +353,27 @@ class Matrix
          * @param y la position en y
          */
         void out(int x, int y) {this->p[y][x]--;}
+
+    private:
+        int rows_, cols_;
+        int **p;
+        int **temp;
+
+        /**
+         * @brief Alloue de l'espace mémoire pour la matrice
+         */
+        void allocSpace();
+
+        /**
+         * @brief effectue une puissance de la matrice
+         * 
+         * @param m matrice
+         * @param n puissance
+         * @return Matrix matrice résultat
+         */
+        Matrix expHelper(const Matrix&, int);
+
+        
 };
 
 /**************/

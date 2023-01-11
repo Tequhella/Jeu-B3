@@ -16,9 +16,25 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-
-    Matrix matrix(80, 60);
-
+    /*
+    int** p = new int*[60];
+    for (int i = 0; i < 60; i++)
+    {
+        p[i] = new int[80];
+    }
+    for (int i = 0; i < 60; i++)
+        for (int j = 0; j < 80; j++)
+            p[i][j] = 0;
+    */  
+    Matrix matrix(60, 80);
+    /*
+    matrix.in(38, 40);
+    matrix.in(39, 40);
+    matrix.in(39, 39);
+    matrix.in(40, 40);
+    matrix.in(41, 40);
+    matrix.in(42, 40);
+    */
     RenderWindow window(VideoMode(LARGEUR, HAUTEUR), "Jeu de la vie !");
 
     Interface interface(&window, matrix);

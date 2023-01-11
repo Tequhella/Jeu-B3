@@ -70,14 +70,12 @@ void Interface::display()
                 window->close();
         }
 
-        window->clear();
-
         for (int i = 0; i < matrix.getLignes(); i++)
         {
             for (int j = 0; j < matrix.getColonnes(); j++)
             {
-                rectangle.setPosition(i * 10, j * 10);
-                if (matrix(i, j) == 0)
+                rectangle.setPosition(j * 10, i * 10);
+                if (matrix(j, i) == 0)
                 {
                     // rectangle vide avec bordure
                     rectangle.setFillColor(Color::White);
@@ -96,6 +94,21 @@ void Interface::display()
         }
 
         window->display();
+
+        window->clear();
+
+        for (int i = 0; i < matrix.getLignes(); i++)
+        {
+            for (int j = 0; j < matrix.getColonnes(); j++)
+            {
+                if (matrix(j, i) == VIVANT)
+                    matrix.reglesVie(j, i);
+                else
+                    matrix.reglesMort(j, i);
+            }
+        }
+
+        matrix.rafraichir();
 
         sleep(milliseconds(100));
     }
