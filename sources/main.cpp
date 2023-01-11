@@ -19,20 +19,11 @@ int main(int argc, char const *argv[])
 
     Matrix matrix(80, 60);
 
-    vector<Acteur*> acteurs;
-
-    srand(time(NULL));
-
-    acteurs.push_back(new Acteur(matrix, 40, 30));
-
     RenderWindow window(VideoMode(LARGEUR, HAUTEUR), "Jeu de la vie !");
 
-    Interface interface(&window, acteurs, matrix);
+    Interface interface(&window, matrix);
 
     interface.display();
-
-    for (unsigned int i = 0; i < acteurs.size(); i++)
-        delete acteurs[i];
     
     return 0;
 }

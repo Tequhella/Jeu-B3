@@ -39,11 +39,6 @@ Interface::Interface(RenderWindow* window, Matrix& matrix) : window(window), rec
     window->setFramerateLimit(20);
 }
 
-Interface::Interface(RenderWindow* window, Matrix& matrix) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), matrix(matrix)
-{
-    window->setFramerateLimit(20);
-}
-
 Interface::Interface(RenderWindow* window, RectangleShape& rectangle) : window(window), rectangle(rectangle), matrix(Matrix(80, 60))
 {
     window->setFramerateLimit(20);

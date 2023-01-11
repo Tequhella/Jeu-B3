@@ -61,14 +61,6 @@ class Interface
          * @brief Constructeur de la classe Interface
          * 
          * @param window la fenêtre
-         * @param matrix la matrice
-         */
-        Interface(RenderWindow* window, Matrix& matrix);
-
-        /**
-         * @brief Constructeur de la classe Interface
-         * 
-         * @param window la fenêtre
          * @param rectangle le rectangle
          */
         Interface(RenderWindow* window, RectangleShape& rectangle);
