@@ -21,7 +21,7 @@ Matrix::Matrix(int rows, int cols) : rows_(rows), cols_(cols)
     {
         for (int j = 0; j < cols_; ++j)
         {
-            p[i][j] = rand() % 2;
+            p[i][j] = 0;
             temp[i][j] = p[i][j];
         }
     }

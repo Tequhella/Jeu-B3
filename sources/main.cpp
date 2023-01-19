@@ -22,20 +22,13 @@ int main(int argc, char const *argv[])
     {
         p[i] = new int[80];
     }
-    for (int i = 0; i < 60; i++)
-        for (int j = 0; j < 80; j++)
-            p[i][j] = 0;
-    */  
-    Matrix matrix(60, 80);
-    /*
-    matrix.in(38, 40);
-    matrix.in(39, 40);
-    matrix.in(39, 39);
-    matrix.in(40, 40);
-    matrix.in(41, 40);
-    matrix.in(42, 40);
+    Matrix matrix(p, 60, 80);
     */
-    RenderWindow window(VideoMode(LARGEUR, HAUTEUR), "Jeu de la vie !");
+    Matrix matrix(HAUTEUR / 10, LARGEUR / 10);
+
+    
+
+    RenderWindow window(VideoMode(LARGEUR, HAUTEUR + 50), "Jeu de la vie !");
 
     Interface interface(&window, matrix);
 

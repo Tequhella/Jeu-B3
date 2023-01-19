@@ -15,9 +15,9 @@
 /* CONSTRUCTEUR */
 /****************/
 
-Interface::Interface() : window(new RenderWindow(VideoMode(LARGEUR, HAUTEUR), "SFML works!")), rectangle(RectangleShape(Vector2f(10, 10))), matrix(Matrix(80, 60))
+Interface::Interface() : window(new RenderWindow(VideoMode(LARGEUR, HAUTEUR + 50), "SFML works!")), rectangle(RectangleShape(Vector2f(10, 10))), matrix(Matrix(80, 60))
 {
-    window->setFramerateLimit(60);
+    window->setFramerateLimit(20);
     window->setVerticalSyncEnabled(true);
 
     /*
@@ -27,26 +27,153 @@ Interface::Interface() : window(new RenderWindow(VideoMode(LARGEUR, HAUTEUR), "S
     text.setFillColor(Color::White);
     text.setPosition(10, 10);
     */
+    // gestion click souris
+    event.mouseButton.button = Mouse::Left;
+    event.mouseButton.x = 0;
+    event.mouseButton.y = 0;
+
+    // bouton start
+    struct ButtonArgs args = 
+    {
+        .rectangle      = RectangleShape(Vector2f(100, 50)),
+        .color          = Color(200, 200, 200, 255),
+        .colorHover     = Color(150, 150, 150, 255),
+        .colorClick     = Color(100, 100, 100, 255),
+        .colorText      = Color::White,
+        .colorTextHover = Color::White,
+        .colorTextClick = Color::White,
+        .x = 0,
+        .y = 0,
+        .width = 100,
+        .height = 50,
+        .textString = "Start"
+    };
+
+    start = Button(args);
 }
 
 Interface::Interface(RenderWindow* window) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), matrix(Matrix(80, 60))
 {
-    window->setFramerateLimit(20);
+    this->window->setFramerateLimit(20);
+    this->window->setVerticalSyncEnabled(true);
+
+    event.mouseButton.button = Mouse::Left;
+    event.mouseButton.x = 0;
+    event.mouseButton.y = 0;
+
+    // bouton start
+    struct ButtonArgs args = 
+    {
+        .rectangle      = RectangleShape(Vector2f(100, 50)),
+        .color          = Color(200, 200, 200, 255),
+        .colorHover     = Color(150, 150, 150, 255),
+        .colorClick     = Color(100, 100, 100, 255),
+        .colorText      = Color::White,
+        .colorTextHover = Color::White,
+        .colorTextClick = Color::White,
+        .x = 0,
+        .y = 0,
+        .width = 100,
+        .height = 50,
+        .textString = "Start"
+    };
+
+    start = Button(args);
+
 }
 
 Interface::Interface(RenderWindow* window, Matrix& matrix) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), matrix(matrix)
 {
-    window->setFramerateLimit(20);
+    this->window->setFramerateLimit(20);
+    this->window->setVerticalSyncEnabled(true);
+
+    font.loadFromFile("arial_mt_black/ARIBL0.ttf");
+    text.setFont(font);
+
+    event.mouseButton.button = Mouse::Left;
+    event.mouseButton.x = 0;
+    event.mouseButton.y = 0;
+
+    // bouton start
+    struct ButtonArgs args = 
+    {
+        .rectangle      = RectangleShape(Vector2f(100, 50)),
+        .text           = Text(text),
+        .font           = Font(font),
+        .color          = Color(200, 200, 200, 255),
+        .colorHover     = Color(150, 150, 150, 255),
+        .colorClick     = Color(100, 100, 100, 255),
+        .colorText      = Color::White,
+        .colorTextHover = Color::White,
+        .colorTextClick = Color::White,
+        .x = 0,
+        .y = 0,
+        .width = 100,
+        .height = 50,
+        .textString = "Start"
+    };
+
+    
+
+    start = Button(args);
 }
 
 Interface::Interface(RenderWindow* window, RectangleShape& rectangle) : window(window), rectangle(rectangle), matrix(Matrix(80, 60))
 {
-    window->setFramerateLimit(20);
+    this->window->setFramerateLimit(20);
+    this->window->setVerticalSyncEnabled(true);
+
+    event.mouseButton.button = Mouse::Left;
+    event.mouseButton.x = 0;
+    event.mouseButton.y = 0;
+
+    // bouton start
+    struct ButtonArgs args = 
+    {
+        .rectangle      = RectangleShape(Vector2f(100, 50)),
+        .color          = Color(200, 200, 200, 255),
+        .colorHover     = Color(150, 150, 150, 255),
+        .colorClick     = Color(100, 100, 100, 255),
+        .colorText      = Color::White,
+        .colorTextHover = Color::White,
+        .colorTextClick = Color::White,
+        .x = 0,
+        .y = 0,
+        .width = 100,
+        .height = 50,
+        .textString = "Start"
+    };
+
+    start = Button(args);
 }
 
 Interface::Interface(RenderWindow* window, RectangleShape& rectangle, Matrix& matrix) : window(window), rectangle(rectangle), matrix(matrix)
 {
-    window->setFramerateLimit(20);
+    this->window->setFramerateLimit(20);
+    this->window->setVerticalSyncEnabled(true);
+
+    event.mouseButton.button = Mouse::Left;
+    event.mouseButton.x = 0;
+    event.mouseButton.y = 0;
+
+    // bouton start
+    struct ButtonArgs args = 
+    {
+        .rectangle      = RectangleShape(Vector2f(100, 50)),
+        .color          = Color(200, 200, 200, 255),
+        .colorHover     = Color(150, 150, 150, 255),
+        .colorClick     = Color(100, 100, 100, 255),
+        .colorText      = Color::White,
+        .colorTextHover = Color::White,
+        .colorTextClick = Color::White,
+        .x = 0,
+        .y = 0,
+        .width = 100,
+        .height = 50,
+        .textString = "Start"
+    };
+
+    start = Button(args);
 }
 
 
@@ -62,19 +189,55 @@ Interface::~Interface()
 
 void Interface::display()
 {
+    // ajout du bouton start
+    Clock clock;
+    int32_t tempTemps      = 0;
+    bool isPause           = true;
+    uint8_t nbClick        = 0;
+    int32_t tempTempsClick = 0;
+
     while (window->isOpen())
     {
         while (window->pollEvent(event))
         {
             if (event.type == Event::Closed)
                 window->close();
+
+            if (event.type == Event::MouseButtonPressed && Mouse::getPosition(*window).y > 50)
+            {
+                if (event.mouseButton.button == Mouse::Left)
+                {
+                    event.mouseButton.x = Mouse::getPosition(*window).x;
+                    event.mouseButton.y = Mouse::getPosition(*window).y;
+                    matrix(Mouse::getPosition(*window).x / 10, (Mouse::getPosition(*window).y - 50) / 10) = (matrix(Mouse::getPosition(*window).x / 10, (Mouse::getPosition(*window).y - 50) / 10) == MORT) ? VIVANT : MORT;
+                }
+            }
         }
 
+        if (nbClick == 0)
+        {
+            start.update(Mouse::getPosition(*window), Mouse::isButtonPressed(Mouse::Left));
+
+            if (start.isClick())
+            {
+                isPause = !isPause;
+                nbClick++;
+                tempTempsClick = clock.getElapsedTime().asMilliseconds();
+            }
+        }
+
+        if (nbClick > 0 && clock.getElapsedTime().asMilliseconds() - tempTempsClick > 50)
+        {
+            nbClick = 0;
+        }
+
+        start.draw(window);
+        
         for (int i = 0; i < matrix.getLignes(); i++)
         {
             for (int j = 0; j < matrix.getColonnes(); j++)
             {
-                rectangle.setPosition(j * 10, i * 10);
+                rectangle.setPosition(j * 10, i * 10 + 50);
                 if (matrix(j, i) == 0)
                 {
                     // rectangle vide avec bordure
@@ -97,20 +260,21 @@ void Interface::display()
 
         window->clear();
 
-        for (int i = 0; i < matrix.getLignes(); i++)
+        if (isPause == false && clock.getElapsedTime().asMilliseconds() - tempTemps >= 100)
         {
-            for (int j = 0; j < matrix.getColonnes(); j++)
+            for (int i = 0; i < matrix.getLignes(); i++)
             {
-                if (matrix(j, i) == VIVANT)
-                    matrix.reglesVie(j, i);
-                else
-                    matrix.reglesMort(j, i);
+                for (int j = 0; j < matrix.getColonnes(); j++)
+                {
+                    if (matrix(j, i) == VIVANT)
+                        matrix.reglesVie(j, i);
+                    else
+                        matrix.reglesMort(j, i);
+                }
             }
+            tempTemps = clock.getElapsedTime().asMilliseconds();
+            matrix.rafraichir();
         }
-
-        matrix.rafraichir();
-
-        sleep(milliseconds(100));
     }
 }
 

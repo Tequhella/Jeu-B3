@@ -16,8 +16,8 @@
 #define HAUTEUR 600
 
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include "matrix.h"
+#include "button.h"
 
 using namespace std;
 using namespace sf;
@@ -31,6 +31,7 @@ class Interface
         Event event;              // évènement
         Font font;                // police
         Text text;                // texte
+        Button start;             // bouton start
 
     public:
     /****************/

@@ -49,5 +49,12 @@
         "streambuf": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/tequhella/Documents/VScode/Pacman",
+            "binaryPath": "/home/tequhella/Documents/VScode/Pacman/app",
+            "binaryArgs": []
+        }
+    ]
 }
