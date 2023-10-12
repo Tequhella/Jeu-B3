@@ -205,6 +205,20 @@ class Button
         void setColorText(Color color);
 
         /**
+         * @brief Défini la couleur du text quand il est survolé
+         * 
+         * @param colorTextHover 
+         */
+        void setColorTextHover(Color colorTextHover) { this->colorTextHover = colorTextHover; }
+
+        /**
+         * @brief Défini la couleur du text quand il est cliqué
+         * 
+         * @param colorTextClick 
+         */
+        void setColorTextClick(Color colorTextClick) { this->colorTextClick = colorTextClick; }
+
+        /**
          * @brief Méthode qui permet de modifier la police
          * 
          * @param font police

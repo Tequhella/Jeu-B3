@@ -80,6 +80,7 @@ Button::Button(
     hover(false),
     click(false)
 {
+    this->rectangle.setPosition(x, y);
     this->text.setPosition(this->x + (this->width / 2) - (text.getLocalBounds().width / 2),this->y + (this->height / 2) - (text.getLocalBounds().height / 1.25));
 }
 
@@ -97,35 +98,35 @@ void Button::setX(int x)
 {
     this->x = x;
     rectangle.setPosition(x, y);
-    text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 2));
+    text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 1.25));
 }
 
 void Button::setY(int y)
 {
     this->y = y;
     rectangle.setPosition(x, y);
-    text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 2));
+    text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 1.25));
 }
 
 void Button::setWidth(int width)
 {
     this->width = width;
     rectangle.setSize(Vector2f(width, height));
-    text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 2));
+    text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 1.25));
 }
 
 void Button::setHeight(int height)
 {
     this->height = height;
     rectangle.setSize(Vector2f(width, height));
-    text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 2));
+    text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 1.25));
 }
 
 void Button::setText(string textString)
 {
     this->textString = textString;
-    text.setString(textString);
-    text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 2));
+    this->text.setString(textString);
+    this->text.setPosition(this->x + (this->width / 2) - (text.getLocalBounds().width / 2),this->y + (this->height / 2) - (text.getLocalBounds().height / 1.25));
 }
 
 void Button::setColor(Color color)

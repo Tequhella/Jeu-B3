@@ -16,6 +16,7 @@
 #define HAUTEUR 600
 
 #include <iostream>
+#include <thread>
 #include "matrix.h"
 #include "button.h"
 
@@ -30,8 +31,11 @@ class Interface
         Matrix matrix;            // matrice
         Event event;              // évènement
         Font font;                // police
-        Text text;                // texte
         Button start;             // bouton start
+        Button darkMode;          // bouton dark mode
+        Color colorCell;          // couleur cellule
+        Color colorVoid;          // couleur vide
+        Color colorBackground;    // couleur fond
 
     public:
     /****************/

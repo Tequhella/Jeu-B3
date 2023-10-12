@@ -20,35 +20,65 @@ Interface::Interface() : window(new RenderWindow(VideoMode(LARGEUR, HAUTEUR + 50
     window->setFramerateLimit(20);
     window->setVerticalSyncEnabled(true);
 
+    this->colorCell = Color::Black;
+    this->colorVoid = Color::White;
+    this->colorBackground = Color(235, 235, 235, 255);
+
     // gestion click souris
     event.mouseButton.button = Mouse::Left;
     event.mouseButton.x = 0;
     event.mouseButton.y = 0;
 
+    Text textStart;
+
     font.loadFromFile("arial_mt_black/ARIBL0.ttf");
-    text.setFont(font);
-    text.setString("Start");
-    text.setFillColor(Color::Black);
-    text.setCharacterSize(24);
-    text.setPosition(0 + (100 / 2) - (text.getLocalBounds().width / 2), 0 + (50 / 2) - (text.getLocalBounds().height / 2));
+    textStart.setFont(font);
+    textStart.setString("Start");
+    textStart.setFillColor(Color::Black);
+    textStart.setCharacterSize(24);
     
 
     start = Button(
         RectangleShape(Vector2f(100, 50)),
-        Text(text),
+        Text(textStart),
         Font(font),
         Color(200, 200, 200, 255),
         Color(150, 150, 150, 255),
         Color(100, 100, 100, 255),
-        text.getFillColor(),
-        text.getFillColor(),
-        text.getFillColor(),
+        textStart.getFillColor(),
+        textStart.getFillColor(),
+        textStart.getFillColor(),
         0,
         0,
         100,
         50,
-        text.getString()
+        textStart.getString()
     );
+
+    Text textDarkMode;
+
+    textDarkMode.setFont(font);
+    textDarkMode.setString("Dark mode");
+    textDarkMode.setFillColor(Color::Black);
+    textDarkMode.setCharacterSize(24);
+
+    darkMode = Button(
+        RectangleShape(Vector2f(200, 50)),
+        Text(textDarkMode),
+        Font(font),
+        Color(200, 200, 200, 255),
+        Color(150, 150, 150, 255),
+        Color(100, 100, 100, 255),
+        textDarkMode.getFillColor(),
+        textDarkMode.getFillColor(),
+        textDarkMode.getFillColor(),
+        101,
+        0,
+        200,
+        50,
+        textDarkMode.getString()
+    );
+
 }
 
 Interface::Interface(RenderWindow* window) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), matrix(Matrix(80, 60))
@@ -56,33 +86,62 @@ Interface::Interface(RenderWindow* window) : window(window), rectangle(Rectangle
     this->window->setFramerateLimit(20);
     this->window->setVerticalSyncEnabled(true);
 
+    this->colorCell = Color::Black;
+    this->colorVoid = Color::White;
+    this->colorBackground = Color(235, 235, 235, 255);
+
     event.mouseButton.button = Mouse::Left;
     event.mouseButton.x = 0;
     event.mouseButton.y = 0;
 
+    Text textStart;
+
     font.loadFromFile("arial_mt_black/ARIBL0.ttf");
-    text.setFont(font);
-    text.setString("Start");
-    text.setFillColor(Color::Black);
-    text.setCharacterSize(24);
-    text.setPosition(0 + (100 / 2) - (text.getLocalBounds().width / 2), 0 + (50 / 2) - (text.getLocalBounds().height / 2));
+    textStart.setFont(font);
+    textStart.setString("Start");
+    textStart.setFillColor(Color::Black);
+    textStart.setCharacterSize(24);
     
 
     start = Button(
         RectangleShape(Vector2f(100, 50)),
-        Text(text),
+        Text(textStart),
         Font(font),
         Color(200, 200, 200, 255),
         Color(150, 150, 150, 255),
         Color(100, 100, 100, 255),
-        text.getFillColor(),
-        text.getFillColor(),
-        text.getFillColor(),
+        textStart.getFillColor(),
+        textStart.getFillColor(),
+        textStart.getFillColor(),
         0,
         0,
         100,
         50,
-        text.getString()
+        textStart.getString()
+    );
+
+    Text textDarkMode;
+
+    textDarkMode.setFont(font);
+    textDarkMode.setString("Dark mode");
+    textDarkMode.setFillColor(Color::Black);
+    textDarkMode.setCharacterSize(24);
+
+    darkMode = Button(
+        RectangleShape(Vector2f(200, 50)),
+        Text(textDarkMode),
+        Font(font),
+        Color(200, 200, 200, 255),
+        Color(150, 150, 150, 255),
+        Color(100, 100, 100, 255),
+        textDarkMode.getFillColor(),
+        textDarkMode.getFillColor(),
+        textDarkMode.getFillColor(),
+        101,
+        0,
+        200,
+        50,
+        textDarkMode.getString()
     );
 
 }
@@ -92,33 +151,62 @@ Interface::Interface(RenderWindow* window, Matrix& matrix) : window(window), rec
     this->window->setFramerateLimit(20);
     this->window->setVerticalSyncEnabled(true);
 
+    this->colorCell = Color::Black;
+    this->colorVoid = Color::White;
+    this->colorBackground = Color(235, 235, 235, 255);
+
     event.mouseButton.button = Mouse::Left;
     event.mouseButton.x = 0;
     event.mouseButton.y = 0;
 
+    Text textStart;
+
     font.loadFromFile("arial_mt_black/ARIBL0.ttf");
-    text.setFont(font);
-    text.setString("Start");
-    text.setFillColor(Color::Black);
-    text.setCharacterSize(24);
-    text.setPosition(0 + (100 / 2) - (text.getLocalBounds().width / 2), 0 + (50 / 2) - (text.getLocalBounds().height / 2));
+    textStart.setFont(font);
+    textStart.setString("Start");
+    textStart.setFillColor(Color::Black);
+    textStart.setCharacterSize(24);
     
 
     start = Button(
         RectangleShape(Vector2f(100, 50)),
-        Text(text),
+        Text(textStart),
         Font(font),
         Color(200, 200, 200, 255),
         Color(150, 150, 150, 255),
         Color(100, 100, 100, 255),
-        text.getFillColor(),
-        text.getFillColor(),
-        text.getFillColor(),
+        textStart.getFillColor(),
+        textStart.getFillColor(),
+        textStart.getFillColor(),
         0,
         0,
         100,
         50,
-        text.getString()
+        textStart.getString()
+    );
+
+    Text textDarkMode;
+
+    textDarkMode.setFont(font);
+    textDarkMode.setString("Dark mode");
+    textDarkMode.setFillColor(Color::Black);
+    textDarkMode.setCharacterSize(24);
+
+    darkMode = Button(
+        RectangleShape(Vector2f(200, 50)),
+        Text(textDarkMode),
+        Font(font),
+        Color(200, 200, 200, 255),
+        Color(150, 150, 150, 255),
+        Color(100, 100, 100, 255),
+        textDarkMode.getFillColor(),
+        textDarkMode.getFillColor(),
+        textDarkMode.getFillColor(),
+        101,
+        0,
+        200,
+        50,
+        textDarkMode.getString()
     );
 }
 
@@ -127,33 +215,62 @@ Interface::Interface(RenderWindow* window, RectangleShape& rectangle) : window(w
     this->window->setFramerateLimit(20);
     this->window->setVerticalSyncEnabled(true);
 
+    this->colorCell = Color::Black;
+    this->colorVoid = Color::White;
+    this->colorBackground = Color(235, 235, 235, 255);
+
     event.mouseButton.button = Mouse::Left;
     event.mouseButton.x = 0;
     event.mouseButton.y = 0;
 
+    Text textStart;
+
     // texte
     font.loadFromFile("arial_mt_black/ARIBL0.ttf");
-    text.setFont(font);
-    text.setString("Start");
-    text.setFillColor(Color::Black);
-    text.setCharacterSize(24);
-    text.setPosition(0 + (100 / 2) - (text.getLocalBounds().width / 2), 0 + (50 / 2) - (text.getLocalBounds().height / 2));
+    textStart.setFont(font);
+    textStart.setString("Start");
+    textStart.setFillColor(Color::Black);
+    textStart.setCharacterSize(24);
 
     start = Button(
         RectangleShape(Vector2f(100, 50)),
-        Text(text),
+        Text(textStart),
         Font(font),
         Color(200, 200, 200, 255),
         Color(150, 150, 150, 255),
         Color(100, 100, 100, 255),
-        text.getFillColor(),
-        text.getFillColor(),
-        text.getFillColor(),
+        textStart.getFillColor(),
+        textStart.getFillColor(),
+        textStart.getFillColor(),
         0,
         0,
         100,
         50,
-        text.getString()
+        textStart.getString()
+    );
+
+    Text textDarkMode;
+
+    textDarkMode.setFont(font);
+    textDarkMode.setString("Dark mode");
+    textDarkMode.setFillColor(Color::Black);
+    textDarkMode.setCharacterSize(24);
+
+    darkMode = Button(
+        RectangleShape(Vector2f(200, 50)),
+        Text(textDarkMode),
+        Font(font),
+        Color(200, 200, 200, 255),
+        Color(150, 150, 150, 255),
+        Color(100, 100, 100, 255),
+        textDarkMode.getFillColor(),
+        textDarkMode.getFillColor(),
+        textDarkMode.getFillColor(),
+        101,
+        0,
+        200,
+        50,
+        textDarkMode.getString()
     );
 
 }
@@ -163,33 +280,63 @@ Interface::Interface(RenderWindow* window, RectangleShape& rectangle, Matrix& ma
     this->window->setFramerateLimit(20);
     this->window->setVerticalSyncEnabled(true);
 
+    this->colorCell = Color::Black;
+    this->colorVoid = Color::White;
+    this->colorBackground = Color(235, 235, 235, 255);
+
     event.mouseButton.button = Mouse::Left;
     event.mouseButton.x = 0;
     event.mouseButton.y = 0;
 
+    Text textStart;
+
     font.loadFromFile("arial_mt_black/ARIBL0.ttf");
-    text.setFont(font);
-    text.setString("Start");
-    text.setFillColor(Color::Black);
-    text.setCharacterSize(24);
+    textStart.setFont(font);
+    textStart.setString("Start");
+    textStart.setFillColor(Color::Black);
+    textStart.setCharacterSize(24);
     
     
 
     start = Button(
         RectangleShape(Vector2f(100, 50)),
-        Text(text),
+        Text(textStart),
         Font(font),
         Color(200, 200, 200, 255),
         Color(150, 150, 150, 255),
         Color(100, 100, 100, 255),
-        text.getFillColor(),
-        text.getFillColor(),
-        text.getFillColor(),
+        textStart.getFillColor(),
+        textStart.getFillColor(),
+        textStart.getFillColor(),
         0,
         0,
         100,
         50,
-        text.getString()
+        textStart.getString()
+    );
+
+    Text textDarkMode;
+
+    textDarkMode.setFont(font);
+    textDarkMode.setString("Dark mode");
+    textDarkMode.setFillColor(Color::Black);
+    textDarkMode.setCharacterSize(24);
+
+    darkMode = Button(
+        RectangleShape(Vector2f(200, 50)),
+        Text(textDarkMode),
+        Font(font),
+        Color(200, 200, 200, 255),
+        Color(150, 150, 150, 255),
+        Color(100, 100, 100, 255),
+        textDarkMode.getFillColor(),
+        textDarkMode.getFillColor(),
+        textDarkMode.getFillColor(),
+        101,
+        0,
+        200,
+        50,
+        textDarkMode.getString()
     );
 }
 
@@ -246,12 +393,59 @@ void Interface::display()
         if (nbClick == 0)
         {
             start.update(Mouse::getPosition(*window), Mouse::isButtonPressed(Mouse::Left));
+            darkMode.update(Mouse::getPosition(*window), Mouse::isButtonPressed(Mouse::Left));
 
             if (start.isClick())
             {
                 isPause = !isPause;
                 nbClick++;
                 tempTempsClick = clock.getElapsedTime().asMilliseconds();
+            }
+
+            if (darkMode.isClick())
+            {
+                nbClick++;
+                tempTempsClick = clock.getElapsedTime().asMilliseconds();
+                if (darkMode.getText() == "Dark mode")
+                {
+                    start.setColor(Color(100, 100, 100, 255));
+                    start.setColorHover(Color(150, 150, 150, 255));
+                    start.setColorClick(Color(200, 200, 200, 255));
+                    start.setColorText(Color::White);
+                    start.setColorTextHover(Color::White);
+                    start.setColorTextClick(Color::White);
+
+                    darkMode.setText("Light mode");
+                    darkMode.setColor(Color(100, 100, 100, 255));
+                    darkMode.setColorHover(Color(150, 150, 150, 255));
+                    darkMode.setColorClick(Color(200, 200, 200, 255));
+                    darkMode.setColorText(Color::White);
+                    darkMode.setColorTextHover(Color::White);
+                    darkMode.setColorTextClick(Color::White);
+                    colorCell = Color::White;
+                    colorVoid = Color::Black;
+                    colorBackground = Color(50, 50, 50, 255);
+                }
+                else
+                {
+                    start.setColor(Color(200, 200, 200, 255));
+                    start.setColorHover(Color(150, 150, 150, 255));
+                    start.setColorClick(Color(100, 100, 100, 255));
+                    start.setColorText(Color::Black);
+                    start.setColorTextHover(Color::Black);
+                    start.setColorTextClick(Color::Black);
+
+                    darkMode.setText("Dark mode");
+                    darkMode.setColor(Color(200, 200, 200, 255));
+                    darkMode.setColorHover(Color(150, 150, 150, 255));
+                    darkMode.setColorClick(Color(100, 100, 100, 255));
+                    darkMode.setColorText(Color::Black);
+                    darkMode.setColorTextHover(Color::Black);
+                    darkMode.setColorTextClick(Color::Black);
+                    colorCell = Color::Black;
+                    colorVoid = Color::White;
+                    colorBackground = Color(235, 235, 235, 255);
+                }
             }
         }
 
@@ -261,6 +455,26 @@ void Interface::display()
         }
 
         start.draw(window);
+        darkMode.draw(window);
+        
+        
+        thread updateThread([&]() {
+            if (isPause == false && clock.getElapsedTime().asMilliseconds() - tempTemps >= 100)
+            {
+                for (int i = 0; i < matrix.getLignes(); i++)
+                {
+                    for (int j = 0; j < matrix.getColonnes(); j++)
+                    {
+                        if (matrix(j, i) == VIVANT)
+                            matrix.reglesVie(j, i);
+                        else
+                            matrix.reglesMort(j, i);
+                    }
+                }
+                tempTemps = clock.getElapsedTime().asMilliseconds();
+                matrix.rafraichir();
+            }
+        });
         
         for (int i = 0; i < matrix.getLignes(); i++)
         {
@@ -270,40 +484,25 @@ void Interface::display()
                 if (matrix(j, i) == 0)
                 {
                     // rectangle vide avec bordure
-                    rectangle.setFillColor(Color::White);
+                    rectangle.setFillColor(colorVoid);
                     rectangle.setOutlineColor(Color::Black);
                     rectangle.setOutlineThickness(1);
                 }
                 else
                 {
                     // rectangle plein
-                    rectangle.setFillColor(Color::Black);
+                    rectangle.setFillColor(colorCell);
                     rectangle.setOutlineColor(Color::Black);
                     rectangle.setOutlineThickness(1);
                 }
                 window->draw(rectangle);
             }
         }
+        updateThread.join();
 
         window->display();
 
-        window->clear();
-
-        if (isPause == false && clock.getElapsedTime().asMilliseconds() - tempTemps >= 100)
-        {
-            for (int i = 0; i < matrix.getLignes(); i++)
-            {
-                for (int j = 0; j < matrix.getColonnes(); j++)
-                {
-                    if (matrix(j, i) == VIVANT)
-                        matrix.reglesVie(j, i);
-                    else
-                        matrix.reglesMort(j, i);
-                }
-            }
-            tempTemps = clock.getElapsedTime().asMilliseconds();
-            matrix.rafraichir();
-        }
+        window->clear(colorBackground);
     }
 }
 
