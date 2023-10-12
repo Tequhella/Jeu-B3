@@ -48,20 +48,24 @@ Button::Button() :
     text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 2));
 }
 
-Button::Button(int x,
-            int y,
-            int width,
-            int height,
-            string textString,
-            Color color,
-            Color colorHover,
-            Color colorClick,
-            Color colorText,
-            Color colorTextHover,
-            Color colorTextClick) : 
-    rectangle(RectangleShape(Vector2f(30, 10))),
-    text(Text()),
-    font(Font()),
+Button::Button(
+    RectangleShape rectangle,
+    Text text,
+    Font font,
+    Color color,
+    Color colorHover,
+    Color colorClick,
+    Color colorText,
+    Color colorTextHover,
+    Color colorTextClick,
+    int x,
+    int y,
+    int width,
+    int height,
+    string textString) :
+    rectangle(rectangle),
+    text(text),
+    font(font),
     color(color),
     colorHover(colorHover),
     colorClick(colorClick),
@@ -76,61 +80,14 @@ Button::Button(int x,
     hover(false),
     click(false)
 {
-    // rectangle
-    rectangle.setFillColor(color);
-    rectangle.setOutlineColor(Color::Black);
-    rectangle.setOutlineThickness(1);
-    rectangle.setPosition(x, y);
-    rectangle.setSize(Vector2f(width, height));
-
-    // texte
-    text.setFont(font);
-    text.setString(textString);
-    text.setFillColor(colorText);
-    text.setCharacterSize(24);
-    text.setPosition(x + (width / 2) - (text.getLocalBounds().width / 2), y + (height / 2) - (text.getLocalBounds().height / 2));
-}
-
-Button::Button(ButtonArgs args) : 
-    rectangle(args.rectangle), 
-    text(args.text), 
-    font(args.font), 
-    color(args.color), 
-    colorHover(args.colorHover), 
-    colorClick(args.colorClick), 
-    colorText(args.colorText), 
-    colorTextHover(args.colorTextHover), 
-    colorTextClick(args.colorTextClick), 
-    x(args.x), 
-    y(args.y), 
-    width(args.width), 
-    height(args.height), 
-    textString(args.textString), 
-    hover(args.hover), 
-    click(args.click)
-{
-    // rectangle
-    rectangle.setFillColor(color);
-    rectangle.setOutlineColor(Color::Black);
-    rectangle.setOutlineThickness(1);
-    rectangle.setPosition(x, y);
-    rectangle.setSize(Vector2f(width, height));
-
-    // texte
-    text.setFont(font);
-    text.setString(textString);
-    text.setFillColor(colorText);
-    text.setCharacterSize(24);
-    text.setPosition(x + (width / 2), y + (height / 2));
+    this->text.setPosition(this->x + (this->width / 2) - (text.getLocalBounds().width / 2),this->y + (this->height / 2) - (text.getLocalBounds().height / 1.25));
 }
 
 /***************/
 /* DESTRUCTEUR */
 /***************/
 
-Button::~Button()
-{
-}
+Button::~Button(){}
 
 /***********/
 /* SETTERS */
@@ -206,7 +163,7 @@ void Button::setFont(Font font)
 void Button::draw(RenderWindow* window)
 {
     window->draw(rectangle);
-    //window->draw(text);
+    window->draw(text);
 }
 
 void Button::update(Vector2i mousePosition, bool mouseClick)

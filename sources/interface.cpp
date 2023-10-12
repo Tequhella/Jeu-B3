@@ -20,36 +20,35 @@ Interface::Interface() : window(new RenderWindow(VideoMode(LARGEUR, HAUTEUR + 50
     window->setFramerateLimit(20);
     window->setVerticalSyncEnabled(true);
 
-    /*
-    font.loadFromFile("arial_mt_black/ARIBL0.ttf");
-    text.setFont(font);
-    text.setCharacterSize(24);
-    text.setFillColor(Color::White);
-    text.setPosition(10, 10);
-    */
     // gestion click souris
     event.mouseButton.button = Mouse::Left;
     event.mouseButton.x = 0;
     event.mouseButton.y = 0;
 
-    // bouton start
-    struct ButtonArgs args = 
-    {
-        .rectangle      = RectangleShape(Vector2f(100, 50)),
-        .color          = Color(200, 200, 200, 255),
-        .colorHover     = Color(150, 150, 150, 255),
-        .colorClick     = Color(100, 100, 100, 255),
-        .colorText      = Color::White,
-        .colorTextHover = Color::White,
-        .colorTextClick = Color::White,
-        .x = 0,
-        .y = 0,
-        .width = 100,
-        .height = 50,
-        .textString = "Start"
-    };
+    font.loadFromFile("arial_mt_black/ARIBL0.ttf");
+    text.setFont(font);
+    text.setString("Start");
+    text.setFillColor(Color::Black);
+    text.setCharacterSize(24);
+    text.setPosition(0 + (100 / 2) - (text.getLocalBounds().width / 2), 0 + (50 / 2) - (text.getLocalBounds().height / 2));
+    
 
-    start = Button(args);
+    start = Button(
+        RectangleShape(Vector2f(100, 50)),
+        Text(text),
+        Font(font),
+        Color(200, 200, 200, 255),
+        Color(150, 150, 150, 255),
+        Color(100, 100, 100, 255),
+        text.getFillColor(),
+        text.getFillColor(),
+        text.getFillColor(),
+        0,
+        0,
+        100,
+        50,
+        text.getString()
+    );
 }
 
 Interface::Interface(RenderWindow* window) : window(window), rectangle(RectangleShape(Vector2f(10, 10))), matrix(Matrix(80, 60))
@@ -61,24 +60,30 @@ Interface::Interface(RenderWindow* window) : window(window), rectangle(Rectangle
     event.mouseButton.x = 0;
     event.mouseButton.y = 0;
 
-    // bouton start
-    struct ButtonArgs args = 
-    {
-        .rectangle      = RectangleShape(Vector2f(100, 50)),
-        .color          = Color(200, 200, 200, 255),
-        .colorHover     = Color(150, 150, 150, 255),
-        .colorClick     = Color(100, 100, 100, 255),
-        .colorText      = Color::White,
-        .colorTextHover = Color::White,
-        .colorTextClick = Color::White,
-        .x = 0,
-        .y = 0,
-        .width = 100,
-        .height = 50,
-        .textString = "Start"
-    };
+    font.loadFromFile("arial_mt_black/ARIBL0.ttf");
+    text.setFont(font);
+    text.setString("Start");
+    text.setFillColor(Color::Black);
+    text.setCharacterSize(24);
+    text.setPosition(0 + (100 / 2) - (text.getLocalBounds().width / 2), 0 + (50 / 2) - (text.getLocalBounds().height / 2));
+    
 
-    start = Button(args);
+    start = Button(
+        RectangleShape(Vector2f(100, 50)),
+        Text(text),
+        Font(font),
+        Color(200, 200, 200, 255),
+        Color(150, 150, 150, 255),
+        Color(100, 100, 100, 255),
+        text.getFillColor(),
+        text.getFillColor(),
+        text.getFillColor(),
+        0,
+        0,
+        100,
+        50,
+        text.getString()
+    );
 
 }
 
@@ -87,35 +92,34 @@ Interface::Interface(RenderWindow* window, Matrix& matrix) : window(window), rec
     this->window->setFramerateLimit(20);
     this->window->setVerticalSyncEnabled(true);
 
-    font.loadFromFile("arial_mt_black/ARIBL0.ttf");
-    text.setFont(font);
-
     event.mouseButton.button = Mouse::Left;
     event.mouseButton.x = 0;
     event.mouseButton.y = 0;
 
-    // bouton start
-    struct ButtonArgs args = 
-    {
-        .rectangle      = RectangleShape(Vector2f(100, 50)),
-        .text           = Text(text),
-        .font           = Font(font),
-        .color          = Color(200, 200, 200, 255),
-        .colorHover     = Color(150, 150, 150, 255),
-        .colorClick     = Color(100, 100, 100, 255),
-        .colorText      = Color::White,
-        .colorTextHover = Color::White,
-        .colorTextClick = Color::White,
-        .x = 0,
-        .y = 0,
-        .width = 100,
-        .height = 50,
-        .textString = "Start"
-    };
-
+    font.loadFromFile("arial_mt_black/ARIBL0.ttf");
+    text.setFont(font);
+    text.setString("Start");
+    text.setFillColor(Color::Black);
+    text.setCharacterSize(24);
+    text.setPosition(0 + (100 / 2) - (text.getLocalBounds().width / 2), 0 + (50 / 2) - (text.getLocalBounds().height / 2));
     
 
-    start = Button(args);
+    start = Button(
+        RectangleShape(Vector2f(100, 50)),
+        Text(text),
+        Font(font),
+        Color(200, 200, 200, 255),
+        Color(150, 150, 150, 255),
+        Color(100, 100, 100, 255),
+        text.getFillColor(),
+        text.getFillColor(),
+        text.getFillColor(),
+        0,
+        0,
+        100,
+        50,
+        text.getString()
+    );
 }
 
 Interface::Interface(RenderWindow* window, RectangleShape& rectangle) : window(window), rectangle(rectangle), matrix(Matrix(80, 60))
@@ -127,24 +131,31 @@ Interface::Interface(RenderWindow* window, RectangleShape& rectangle) : window(w
     event.mouseButton.x = 0;
     event.mouseButton.y = 0;
 
-    // bouton start
-    struct ButtonArgs args = 
-    {
-        .rectangle      = RectangleShape(Vector2f(100, 50)),
-        .color          = Color(200, 200, 200, 255),
-        .colorHover     = Color(150, 150, 150, 255),
-        .colorClick     = Color(100, 100, 100, 255),
-        .colorText      = Color::White,
-        .colorTextHover = Color::White,
-        .colorTextClick = Color::White,
-        .x = 0,
-        .y = 0,
-        .width = 100,
-        .height = 50,
-        .textString = "Start"
-    };
+    // texte
+    font.loadFromFile("arial_mt_black/ARIBL0.ttf");
+    text.setFont(font);
+    text.setString("Start");
+    text.setFillColor(Color::Black);
+    text.setCharacterSize(24);
+    text.setPosition(0 + (100 / 2) - (text.getLocalBounds().width / 2), 0 + (50 / 2) - (text.getLocalBounds().height / 2));
 
-    start = Button(args);
+    start = Button(
+        RectangleShape(Vector2f(100, 50)),
+        Text(text),
+        Font(font),
+        Color(200, 200, 200, 255),
+        Color(150, 150, 150, 255),
+        Color(100, 100, 100, 255),
+        text.getFillColor(),
+        text.getFillColor(),
+        text.getFillColor(),
+        0,
+        0,
+        100,
+        50,
+        text.getString()
+    );
+
 }
 
 Interface::Interface(RenderWindow* window, RectangleShape& rectangle, Matrix& matrix) : window(window), rectangle(rectangle), matrix(matrix)
@@ -156,24 +167,30 @@ Interface::Interface(RenderWindow* window, RectangleShape& rectangle, Matrix& ma
     event.mouseButton.x = 0;
     event.mouseButton.y = 0;
 
-    // bouton start
-    struct ButtonArgs args = 
-    {
-        .rectangle      = RectangleShape(Vector2f(100, 50)),
-        .color          = Color(200, 200, 200, 255),
-        .colorHover     = Color(150, 150, 150, 255),
-        .colorClick     = Color(100, 100, 100, 255),
-        .colorText      = Color::White,
-        .colorTextHover = Color::White,
-        .colorTextClick = Color::White,
-        .x = 0,
-        .y = 0,
-        .width = 100,
-        .height = 50,
-        .textString = "Start"
-    };
+    font.loadFromFile("arial_mt_black/ARIBL0.ttf");
+    text.setFont(font);
+    text.setString("Start");
+    text.setFillColor(Color::Black);
+    text.setCharacterSize(24);
+    
+    
 
-    start = Button(args);
+    start = Button(
+        RectangleShape(Vector2f(100, 50)),
+        Text(text),
+        Font(font),
+        Color(200, 200, 200, 255),
+        Color(150, 150, 150, 255),
+        Color(100, 100, 100, 255),
+        text.getFillColor(),
+        text.getFillColor(),
+        text.getFillColor(),
+        0,
+        0,
+        100,
+        50,
+        text.getString()
+    );
 }
 
 
@@ -187,6 +204,18 @@ Interface::~Interface()
 /* METHODES */
 /************/
 
+/**
+ * @brief Displays the game interface and handles user input.
+ * 
+ * The function displays the game interface and handles user input.
+ * It creates a window and draws a grid of rectangles representing the cells of the game.
+ * The user can click on the cells to toggle their state.
+ * The function also adds a start button that toggles the game state between pause and play.
+ * The game follows the rules of the Game of Life, where cells can either be alive or dead,
+ * and their state changes based on the state of their neighbors.
+ * 
+ * @return void
+ */
 void Interface::display()
 {
     // ajout du bouton start

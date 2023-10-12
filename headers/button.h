@@ -18,27 +18,6 @@
 using namespace std;
 using namespace sf;
 
-// structure des arguments du bouton
-struct ButtonArgs
-{
-    RectangleShape rectangle; // rectangle
-    Text text;                // texte
-    Font font;                // police
-    Color color;              // couleur
-    Color colorHover;         // couleur hover
-    Color colorClick;         // couleur click
-    Color colorText;          // couleur texte
-    Color colorTextHover;     // couleur texte hover
-    Color colorTextClick;     // couleur texte click
-    int x;                    // position x
-    int y;                    // position y
-    int width;                // largeur
-    int height;               // hauteur
-    string textString;        // texte
-    bool hover;               // hover
-    bool click;               // click
-};
-
 class Button
 {
     private:
@@ -70,40 +49,39 @@ class Button
         Button();
 
         /**
-         * @brief Constructeur de la classe Button
+         * @brief Constructs a Button object with the specified parameters.
          * 
-         * @param x position x
-         * @param y position y
-         * @param width largeur
-         * @param height hauteur
-         * @param textString texte
-         * @param color couleur
-         * @param colorHover couleur hover
-         * @param colorClick couleur click
-         * @param colorText couleur texte
-         * @param colorTextHover couleur texte hover
-         * @param colorTextClick couleur texte click
+         * @param rectangle The rectangle shape of the button.
+         * @param text The text of the button.
+         * @param font The font of the button text.
+         * @param color The color of the button.
+         * @param colorHover The color of the button when hovered over.
+         * @param colorClick The color of the button when clicked.
+         * @param colorText The color of the button text.
+         * @param colorTextHover The color of the button text when hovered over.
+         * @param colorTextClick The color of the button text when clicked.
+         * @param x The x-coordinate of the button.
+         * @param y The y-coordinate of the button.
+         * @param width The width of the button.
+         * @param height The height of the button.
+         * @param textString The string of the button text.
          */
         Button(
-            int x,
-            int y,
-            int width,
-            int height,
-            string textString,
+            RectangleShape rectangle,
+            Text text,
+            Font font,
             Color color,
             Color colorHover,
             Color colorClick,
             Color colorText,
             Color colorTextHover,
-            Color colorTextClick
+            Color colorTextClick,
+            int x,
+            int y,
+            int width,
+            int height,
+            string textString
         );
-
-        /**
-         * @brief Constructeur de la classe Button 
-         * 
-         * @param args arguments
-         */
-        Button(ButtonArgs args);
 
     /***************/
     /* DESTRUCTEUR */
